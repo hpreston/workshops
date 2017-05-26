@@ -1,0 +1,4 @@
+export SPARK_BOT_URL=
+export SPARK_BOT_TOKEN=
+export SPARK_BOT_EMAIL=
+export SPARK_BOT_APP_NAME=
