@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: nxtoolkit
+Version: 0.2
+Summary: This library allows basic Cisco Nexus configuration.
+Home-page: http://datacenter.github.io/nxtoolkit/
+Author: Cisco Systems, Inc.
+Author-email: nxtoolkit@external.cisco.com
+License: Apache License, Version 2.0
+Description: UNKNOWN
+Platform: UNKNOWN

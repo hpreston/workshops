@@ -1,0 +1,10 @@
+requests
+websocket-client
+gitpython
+flask-sqlalchemy
+flask-admin
+flask-bootstrap
+flask-wtf
+flask
+pymysql
+tabulate

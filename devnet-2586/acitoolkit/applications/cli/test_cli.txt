@@ -1,0 +1,99 @@
+show bridgedomain
+show tenant
+show app
+show epg
+show interface
+show context
+show invalid
+show infradomains
+help show
+?
+config t
+interface eth 1/101/1/65
+speed 1G 1G
+speed 1000G
+speed 100M
+no speed 100M
+speed 10G
+epg
+epg epg1
+exit
+bridgedomain
+bridgedomain bd1 bd2
+bridgedomain bd1
+context
+context ctx1
+context ctx1 ctx2
+no context ctx1
+contract contract1
+show contract
+app app1
+tenant
+tenant acitoolkit acitoolkit
+tenant acitoolkit
+no tenant acitoolkit
+tenant acitoolkit
+exit
+switchto acitoolkit
+config t
+interface eth 1/101/1/65
+exit
+exit
+switchback acitoolkit
+switchback
+no switchto acitoolkit
+switchto
+switchto acitoolkit acitoolkit
+switchto dlfkdjflshf
+switchto acitoolkit
+conf t
+bridgedomain bd1
+ip
+ip address
+ip address address address
+ip address 1.2.3.4/24
+no ip address 1.2.3.4/24
+show bridgedomain
+show tenant
+show app
+show epg
+show interface
+show port-channel
+show context
+show contract
+exit
+no bridgedomain bd1
+context ctx
+allowall
+no allowall
+exit
+no context ctx
+contract contract1 contract2
+contract contract1
+exit
+no contract contract1
+app
+app app1 app2
+app app1
+epg
+epg epg1 epg2
+epg epg1
+bridgedomain
+bridgedomain bd1 bd2
+bridgedomain bd1
+no bridgedomain bd1
+exit
+no epg epg2
+exit
+interface eth 1/101/1/65
+epg app1/epg1 vlan 1
+exit
+app app1
+no epg epg1
+exit
+no app app1
+no tenant acitoolkit
+exit
+exit
+
+
