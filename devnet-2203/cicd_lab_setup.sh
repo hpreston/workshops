@@ -23,6 +23,9 @@ mkdir ~/coding
 cd ~/coding 
 git clone http://labdev${DEVNUMBER}@cleur-gogs.lab.apps.imapex.io/labdev0/cicd_demoapp
 cd cicd_demoapp
+git config user.email "labdev${DEVNUMBER}@imapex.io"
+git config user.name "Lab Dev${DEVNUMBER}"
+
 
 echo " " 
 echo "Step 2: Backup lab files for cleanup" 
@@ -39,8 +42,6 @@ echo "Step 4: Open Browser Window for Tools"
 open http://cleur-gogs.lab.apps.imapex.io \
     http://cleur-drone.lab.apps.imapex.io \
     https://web.ciscospark.com \
-    https://hub.docker.com \
-    "https://control.sandbox.imapex.io/marathon/ui/#/apps" \
     -a /Applications/Google\ Chrome.app/
 
 echo " " 
