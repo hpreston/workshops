@@ -21,7 +21,7 @@ echo " "
 echo "Step 1: Pull down lab code." 
 mkdir ~/coding
 cd ~/coding 
-git clone http://labdev${DEVNUMBER}@cleur-gogs.lab.apps.imapex.io/labdev0/cicd_demoapp
+git clone http://labdev${DEVNUMBER}@cleur-gogs.lab.apps.imapex.io/labdev${DEVNUMBER}/cicd_demoapp
 cd cicd_demoapp
 git config user.email "labdev${DEVNUMBER}@imapex.io"
 git config user.name "Lab Dev${DEVNUMBER}"
