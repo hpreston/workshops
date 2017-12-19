@@ -273,3 +273,78 @@
 2017/12/19 19:31:38 [TRACE] Session ID: a5cc99b586aec9fe
 2017/12/19 19:31:38 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
 2017/12/19 19:31:38 [TRACE] Template: repo/home
+2017/12/19 22:23:37 [TRACE] Log Mode: File (Trace)
+2017/12/19 22:23:37 [ INFO] DEVNET-2203 - NetDevOps CICD 0.9.141.0211
+2017/12/19 22:23:37 [ INFO] Cache Service Enabled
+2017/12/19 22:23:37 [ INFO] Session Service Enabled
+2017/12/19 22:23:37 [ INFO] Git Version: 2.6.6
+2017/12/19 22:23:37 [ INFO] SQLite3 Supported
+2017/12/19 22:23:37 [ INFO] Run Mode: Production
+2017/12/19 22:23:37 [TRACE] Doing: CheckRepoStats
+2017/12/19 22:23:38 [ INFO] Listen: http://0.0.0.0:3000/gogs
+2017/12/19 22:23:53 [TRACE] Session ID: 199bdcfc37dad9a9
+2017/12/19 22:23:53 [TRACE] CSRF Token: rKJymrisCW4q1uzucYQvpIQlcY86MTUxMzcyMjIzMzc5Mzc3MjkxMQ==
+2017/12/19 22:23:54 [TRACE] Session ID: d598ee32f7ffc128
+2017/12/19 22:23:54 [TRACE] CSRF Token: e7-wf6S_7jBlJvenjTig8FAJiq06MTUxMzcyMjIzNDE3NzkxMjM4NA==
+2017/12/19 22:24:27 [TRACE] Session ID: e1dcc836d8e79238
+2017/12/19 22:24:27 [TRACE] CSRF Token: ttK5caQ-AWTddvUBtTXjDdkYHrQ6MTUxMzcyMjI2NzI5NjEzNDIxNw==
+2017/12/19 22:24:29 [TRACE] Session ID: a5cc99b586aec9fe
+2017/12/19 22:24:29 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
+2017/12/19 22:24:29 [TRACE] Template: repo/home
+2017/12/19 22:24:31 [TRACE] Session ID: a5cc99b586aec9fe
+2017/12/19 22:24:31 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
+2017/12/19 22:24:31 [TRACE] Template: repo/home
+2017/12/19 22:24:34 [TRACE] Session ID: a5cc99b586aec9fe
+2017/12/19 22:24:34 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
+2017/12/19 22:24:34 [TRACE] Template: repo/home
+2017/12/19 22:25:46 [TRACE] Session ID: e2514832c6a77d7c
+2017/12/19 22:25:46 [TRACE] CSRF Token: oRMBCbnEY6QOwgjPF2Wkc4Wq5sI6MTUxMzcyMjM0NjI1ODUxMDE1Mw==
+2017/12/19 22:25:46 [TRACE] Session ID: 1be81d9f43e54f9f
+2017/12/19 22:25:46 [TRACE] CSRF Token: 04Vnk7d6Dcqe7PpRvWT8_peNmUg6MTUxMzcyMjM0NjQyNTE2MDE1Mw==
+2017/12/19 22:25:46 [TRACE] Session ID: 8aaa99cd3c1b1f75
+2017/12/19 22:25:46 [TRACE] CSRF Token: bdaNBidxF2PkxEHL54chdiXLeD86MTUxMzcyMjM0NjgxODUzOTU3OQ==
+2017/12/19 22:25:47 [TRACE] Session ID: fc3940eeeedc4709
+2017/12/19 22:25:47 [TRACE] CSRF Token: 7K4RrwD-ADaYxvR8lUQTSwlZrPk6MTUxMzcyMjM0Nzc1MjgxOTAwNw==
+2017/12/19 22:25:47 [TRACE] AddTestPullRequestTask [head_repo_id: 2, head_branch: master]: finding pull requests
+2017/12/19 22:25:47 [TRACE] DeliverHooks [repo_id: 2]
+2017/12/19 22:25:47 [TRACE] AddTestPullRequestTask [base_repo_id: 2, base_branch: master]: finding pull requests
+2017/12/19 22:25:47 [TRACE] Hook delivery failed: 6805a4fe-9297-406d-b6c6-78a6214251ee
+2017/12/19 22:25:54 [TRACE] Session ID: a5cc99b586aec9fe
+2017/12/19 22:25:54 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
+2017/12/19 22:25:54 [TRACE] Template: repo/home
+2017/12/19 22:27:02 [TRACE] Session ID: c3bd6c7c610a1c3d
+2017/12/19 22:27:02 [TRACE] CSRF Token: mZpoc5ckStw5o3tI1RVMU7APAiI6MTUxMzcyMjQyMjAxMjcyNDAxMA==
+2017/12/19 22:27:02 [TRACE] Session ID: e810efc11fcc5bc9
+2017/12/19 22:27:02 [TRACE] CSRF Token: 5jVwRB2gUjNAlmjSsKyD0M6KAVo6MTUxMzcyMjQyMjE4NDQyMDc1NA==
+2017/12/19 22:27:02 [TRACE] Session ID: d6065dd67b6141cc
+2017/12/19 22:27:02 [TRACE] CSRF Token: K3xrsemRWctJTFUvN8osniNAtSw6MTUxMzcyMjQyMjY0MjQ3NTQ5OA==
+2017/12/19 22:27:03 [TRACE] Session ID: 4c9cf81732223c25
+2017/12/19 22:27:03 [TRACE] CSRF Token: DFrXKn8Va70Hplkao5CJRzoqD7A6MTUxMzcyMjQyMzA5MDYxODg3Nw==
+2017/12/19 22:27:03 [TRACE] DeliverHooks [repo_id: 2]
+2017/12/19 22:27:03 [TRACE] AddTestPullRequestTask [head_repo_id: 2, head_branch: master]: finding pull requests
+2017/12/19 22:27:03 [TRACE] AddTestPullRequestTask [base_repo_id: 2, base_branch: master]: finding pull requests
+2017/12/19 22:27:03 [TRACE] Hook delivery failed: 7cdea930-86d5-402f-b7ca-8d58b74ee638
+2017/12/19 22:27:07 [TRACE] Session ID: a5cc99b586aec9fe
+2017/12/19 22:27:07 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
+2017/12/19 22:27:07 [TRACE] Template: repo/home
+2017/12/19 22:27:59 [TRACE] Session ID: 567d2cd67d01844a
+2017/12/19 22:27:59 [TRACE] CSRF Token: e5nGBxNM4let1dROGMpqw5mzcKc6MTUxMzcyMjQ3OTY1NTY2NjQ0NA==
+2017/12/19 22:27:59 [TRACE] Session ID: 53178d4409041109
+2017/12/19 22:27:59 [TRACE] CSRF Token: X1tQuoLM9OzKSv27_TaBmN3cp0w6MTUxMzcyMjQ3OTgxNzA3ODA5MA==
+2017/12/19 22:28:00 [TRACE] Session ID: 6ba1a8e7b263dede
+2017/12/19 22:28:00 [TRACE] CSRF Token: lPyBryY40MMv9NZK_3TatvMpWp46MTUxMzcyMjQ4MDQ3NTcxMTQwMQ==
+2017/12/19 22:28:00 [TRACE] Session ID: 402784211337d05f
+2017/12/19 22:28:00 [TRACE] CSRF Token: ZiewuK-D9J82VOEvCpbrGxG5ik86MTUxMzcyMjQ4MDg2NDU5MTQ0OA==
+2017/12/19 22:28:01 [TRACE] AddTestPullRequestTask [head_repo_id: 2, head_branch: dev]: finding pull requests
+2017/12/19 22:28:01 [TRACE] DeliverHooks [repo_id: 2]
+2017/12/19 22:28:01 [TRACE] AddTestPullRequestTask [base_repo_id: 2, base_branch: dev]: finding pull requests
+2017/12/19 22:28:01 [TRACE] Hook delivery failed: c6257d21-beea-408e-add8-8ed50dc5ad63
+2017/12/19 22:28:05 [TRACE] Session ID: a5cc99b586aec9fe
+2017/12/19 22:28:05 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
+2017/12/19 22:28:05 [TRACE] Template: repo/home
+2017/12/19 22:28:08 [TRACE] Session ID: a5cc99b586aec9fe
+2017/12/19 22:28:08 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
+2017/12/19 22:28:08 [TRACE] Template: repo/home
+2017/12/19 22:28:12 [TRACE] Session ID: a5cc99b586aec9fe
+2017/12/19 22:28:12 [TRACE] CSRF Token: 7hHAIBL5wMsbsh9JQt34xsxZdPM6MTUxMzcwOTg2NDI0NTAzNzc5Ng==
+2017/12/19 22:28:12 [TRACE] Template: repo/home
