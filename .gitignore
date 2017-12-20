@@ -1,0 +1,7 @@
+venv/
+*.pyc
+scratch.txt
+mybot.py
+.vagrant
+.virl/
+*.retry

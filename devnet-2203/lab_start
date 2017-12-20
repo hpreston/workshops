@@ -1,0 +1,4 @@
+#! /bin/bash
+
+source lab_env
+cd network_cicd_lab

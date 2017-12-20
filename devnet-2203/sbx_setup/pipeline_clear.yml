@@ -1,0 +1,17 @@
+---
+- name: Clear Lab Pipeline
+  hosts: devbox
+
+  tasks:
+    - name: docker-compose down the Pipeline
+      shell: docker-compose down
+      args:
+        chdir: ~/ciscolive_workshops/devnet-2203/pipeline
+        executable: /bin/bash
+
+    - name: Delete the Repo
+      shell: rm -Rf ciscolive_workshops/
+      args:
+        chdir: ~/
+        executable: /bin/bash
+        removes: ~/ciscolive_workshops

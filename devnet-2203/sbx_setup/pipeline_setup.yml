@@ -1,0 +1,47 @@
+---
+- name: Update Docker CE
+  hosts: devbox
+
+  roles:
+    - zaxos.docker-ce-ansible-role
+
+- name: Install docker-compose
+  hosts: devbox
+
+  tasks:
+    - name: Check Docker compose bin file presence
+      stat: path=/usr/local/bin/docker-compose
+      register: dockercompose
+
+    - name: Install docker compose
+      shell: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+      when: dockercompose.stat.exists == false
+
+    - name: Apply executable permission
+      file: path=/usr/local/bin/docker-compose mode="u+x,g+x"
+
+    - name: Test docker-compose version
+      shell: docker-compose --version
+
+- name: Start Lab Pipeline
+  hosts: devbox
+
+  tasks:
+    - name: Clone repo
+      shell: git clone https://github.com/hpreston/ciscolive_workshops
+      args:
+        chdir: ~/
+        executable: /bin/bash
+        creates: ~/ciscolive_workshops
+
+    - name: Update repo
+      shell: git pull
+      args:
+        chdir: ~/ciscolive_workshops
+        executable: /bin/bash
+
+    - name: docker-compose Up the Pipeline
+      shell: docker-compose up -d
+      args:
+        chdir: ~/ciscolive_workshops/devnet-2203/pipeline
+        executable: /bin/bash
