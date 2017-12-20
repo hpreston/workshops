@@ -281,3 +281,45 @@ sh run | inc community
 prod-IOSv-1#sh run | inc community
 snmp-server community SecureRead RO
 snmp-server community SecureWrite RW
+
+# Exercise 14: Update Ansible Configuration
+# Open Global Variable File for Ansible 
+open ansible/group_vars/all.yaml
+
+# Update Read & Write Communities
+global_snmp:
+  servers:
+    - 192.168.100.13
+    - 192.168.101.13
+  read_community: NewSecureRead    <--
+  write_community: NewSecureWrite  <--
+  traps_list: snmp linkdown linkup
+
+# Exercise 15: Test Locally Against Vagrant
+cd ansible/
+source ansible_env_dev
+ansible-playbook -i hosts_dev playbooks/site.yaml
+
+# Exercise 16: Commit changes to Source Control
+git add group_vars/all.yaml
+git commit -m "Updated SNMP Community Strings"
+git push
+
+# Exercise 17: Verify Current SNMP Settings
+# Telnet to a Production Device 
+telnet 172.16.30.201 
+
+# Verify Current SNMP Community String 
+sh run | inc community
+
+# *** Expected Output ***
+prod-IOSv-1#sh run | inc community
+snmp-server community NewSecureRead RO
+snmp-server community NewSecureWrite RW
+
+# Lab Cleanup
+cd ~/coding/ciscolive_workshops/devnet-2203/
+./cicd_lab_cleanup1.sh
+
+# After above finishes
+sudo ./cicd_lab_cleanup2_sudo.sh
