@@ -4,7 +4,7 @@ echo "Beginning Cleanup"
 echo "Step 7: Destroy local Vagrant Dev"
 cd ~/coding/ciscolive_workshops/devnet-2203/network_cicd_lab
 # Can't do this in SUDO because of VirtualBox Limitation
-vagrant destroy
+vagrant destroy -f
 
 echo "Step 6: Delete Lab Repo from Gogs "
 cd ~/coding/ciscolive_workshops/devnet-2203/

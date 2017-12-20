@@ -52,8 +52,11 @@ then
     fi
 fi
 
-echo "Setup Part 1 Complete.  "
-echo "  Please run this command to complete setup. (No 'sudo')"
+echo "Lab VPN Connection Successful."
+echo "  If instructed, run this command to complete setup. (No 'sudo')"
 echo " "
 echo "    ./cicd_lab_setup2.sh"
 echo " "
+echo "  To start the lab run this command."
+echo " "
+echo "  source lab_start"

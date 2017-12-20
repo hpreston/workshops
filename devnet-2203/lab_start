@@ -1,4 +1,15 @@
 #! /bin/bash
-
+source venv/bin/activate
 source lab_env
+
+open lab_notes.txt
+
 cd network_cicd_lab
+
+# open -a /Applications/Google\ Chrome.app --args --incognito
+open http://10.10.20.20/gogs/netdevopsuser/network_cicd_lab -a /Applications/Google\ Chrome.app --args --incognito
+open http://10.10.20.20 -a /Applications/Google\ Chrome.app --args --incognito
+open http://10.10.20.160:19400/simulations/ -a /Applications/Google\ Chrome.app --args --incognito
+open https://web.ciscospark.com -a /Applications/Google\ Chrome.app --args --incognito
+
+vagrant up
