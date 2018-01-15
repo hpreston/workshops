@@ -1,6 +1,7 @@
 ---
 - name: Clear Lab Pipeline
   hosts: devbox
+  gather_facts: no
 
   tasks:
     - name: docker-compose down the Pipeline

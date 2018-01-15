@@ -25,6 +25,7 @@ drone secret add --repository netdevopsuser/network_cicd_lab --name GOGS_USER --
 drone secret add --repository netdevopsuser/network_cicd_lab --name GOGS_PASS --value network
 
 # Spark Credentials for Notifications 
+# Get token from: https://cisco.box.com/v/SPT
 drone secret add --repository netdevopsuser/network_cicd_lab --name SPARK_TOKEN --value <TOKEN VALUE Provided>
 drone secret add --repository netdevopsuser/network_cicd_lab --name PERSONEMAIL --value <Your Spark Email> 
 
@@ -34,6 +35,9 @@ drone secret add --repository netdevopsuser/network_cicd_lab --name VIRL_PASSWOR
 drone secret add --repository netdevopsuser/network_cicd_lab --name VIRL_HOST --value http://10.10.20.160:19399
 
 # Exercise 5: Update Pipeline Definition
+cd ../
+open .drone.yml
+
 # New .drone.yml content
 pipeline:
   BuildStart:

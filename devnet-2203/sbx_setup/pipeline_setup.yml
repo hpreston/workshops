@@ -25,6 +25,7 @@
 
 - name: Start Lab Pipeline
   hosts: devbox
+  gather_facts: no
 
   tasks:
     - name: Clone repo
@@ -45,3 +46,15 @@
       args:
         chdir: ~/ciscolive_workshops/devnet-2203/pipeline
         executable: /bin/bash
+
+- name: Pre-Pull Docker Images for Lab
+  hosts: devbox
+  gather_facts: no
+
+  tasks:
+    - name: Pull Ansible NetDevOps
+      shell: docker pull hpreston/drone-ansible-netdevops
+    - name: Pull VIRL
+      shell: docker pull hpreston/drone-virl:0.7
+    - name: Pull Spark
+      shell: docker pull hpreston/drone-spark:0.7
