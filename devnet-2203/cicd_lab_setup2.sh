@@ -9,7 +9,7 @@ echo " "
 echo "Beginning Setup"
 echo "Step 1: Installing Pre-Reqs"
 echo "  - Python"
-cd ~/coding/ciscolive_workshops/devnet-2203
+cd ~/code/ciscolive_workshops/devnet-2203
 pwd
 virtualenv venv --python=python2.7
 source venv/bin/activate
@@ -40,14 +40,14 @@ fi
 
 
 echo "Step 4: Run Setup Pipeline on DevBox"
-cd ~/coding/ciscolive_workshops/devnet-2203/sbx_setup
+cd ~/code/ciscolive_workshops/devnet-2203/sbx_setup
 ansible-playbook -u root pipeline_setup.yml
 
 echo "Step 5: Setup VIRL for Lab"
-source ~/coding/ciscolive_workshops/devnet-2203/lab_env
-cd ~/coding/ciscolive_workshops/devnet-2203/prod_net
+source ~/code/ciscolive_workshops/devnet-2203/lab_env
+cd ~/code/ciscolive_workshops/devnet-2203/prod_net
 echo "  - Clearing Old VIRL Status"
-rm -Rf ~/coding/ciscolive_workshops/devnet-2203/prod_net/.virl/
+rm -Rf ~/code/ciscolive_workshops/devnet-2203/prod_net/.virl/
 echo "  - Shutting down default simulation"
 virl ls --all
 virl down --sim-name API-Test
@@ -57,11 +57,11 @@ virl nodes
 
 
 echo "Step 6: Clone Down Lab Repo from Gogs "
-cd ~/coding/ciscolive_workshops/devnet-2203/
+cd ~/code/ciscolive_workshops/devnet-2203/
 git clone http://netdevopsuser@10.10.20.20/gogs/netdevopsuser/network_cicd_lab
 
 echo "Step 7: Getting local Vagrant Dev Prepped"
-cd ~/coding/ciscolive_workshops/devnet-2203/network_cicd_lab
+cd ~/code/ciscolive_workshops/devnet-2203/network_cicd_lab
 vagrant up
 vagrant suspend
 vagrant status
