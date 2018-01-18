@@ -1,7 +1,7 @@
 #! /bin/bash
 
-mkdir -p ~/coding/temp
-cd ~/coding/temp
+mkdir -p ~/code/temp
+cd ~/code/temp
 git clone https://github.com/hpreston/vagrant_net_prog
 cd vagrant_net_prog/lab
 virtualenv venv --python=python2.7
