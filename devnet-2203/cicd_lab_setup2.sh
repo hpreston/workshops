@@ -18,6 +18,9 @@ pip install -r requirements.txt
 echo "  - Ansible Roles"
 ansible-galaxy install zaxos.docker-ce-ansible-role
 
+echo "  - Telnet"
+brew install telnet
+
 # echo "  - SSH Pass"
 # brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
 
@@ -59,6 +62,9 @@ virl nodes
 echo "Step 6: Clone Down Lab Repo from Gogs "
 cd ~/code/ciscolive_workshops/devnet-2203/
 git clone http://netdevopsuser@10.10.20.20/gogs/netdevopsuser/network_cicd_lab
+cd ~/code/ciscolive_workshops/devnet-2203/network_cicd_lab
+git config user.name "NetDevOps User"
+git config user.email "netdevopsuser@netdevops.local"
 
 echo "Step 7: Getting local Vagrant Dev Prepped"
 cd ~/code/ciscolive_workshops/devnet-2203/network_cicd_lab

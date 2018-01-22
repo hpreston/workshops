@@ -11,5 +11,6 @@ open http://10.10.20.20/gogs/netdevopsuser/network_cicd_lab -a /Applications/Goo
 open http://10.10.20.20 -a /Applications/Google\ Chrome.app --args --incognito
 open http://10.10.20.160:19400/simulations/ -a /Applications/Google\ Chrome.app --args --incognito
 open https://web.ciscospark.com -a /Applications/Google\ Chrome.app --args --incognito
+open https://cisco.box.com/v/SPT -a /Applications/Google\ Chrome.app --args --incognito
 
 vagrant up

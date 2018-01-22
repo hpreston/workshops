@@ -124,6 +124,13 @@ pipeline:
       status: [ success, failure ]
 
 ################################################################################
+# Exercise 8: Commit changes to Source Control
+################################################################################
+git add .drone.yml
+git commit -m "Added Integration Phase"
+git push
+
+################################################################################
 # Exercise 9: Update Pipeline Definition
 ################################################################################
 # New .drone.yml content
@@ -189,6 +196,12 @@ pipeline:
     when:
       status: [ success, failure ]
 
+################################################################################
+# Exercise 10: Commit changes to Source Control
+################################################################################
+git add .drone.yml
+git commit -m "Added Delivery Phase"
+git push
 
 ################################################################################
 # Exercise 11: Update Pipeline Definition
