@@ -73,6 +73,9 @@ git config user.email "netdevopsuser@netdevops.local"
 # vagrant status
 
 echo "Step 8: Preparing Drone and Gogs for Pipeline"
+curl -L https://github.com/drone/drone-cli/releases/download/v0.7.0/drone_linux_amd64.tar.gz | tar zx
+sudo install -t /usr/local/bin drone
+
 export DRONE_SERVER=http://10.10.20.20
 export DRONE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoibmV0ZGV2b3BzdXNlciIsInR5cGUiOiJ1c2VyIn0.24hOotRJyhNegtUPRjcyDzK4QyOW3xWWPJeUhozGsYk
 
@@ -96,7 +99,11 @@ drone secret add --repository netdevopsuser/network_cicd_lab --name VIRL_PASSWOR
 drone secret add --repository netdevopsuser/network_cicd_lab --name VIRL_HOST --value http://10.10.20.160:19399
 
 echo "Step 10: Running playbook against production"
-# verify playbook has wait for switches to be live before running
+cd ~/code/ciscolive_workshops/devnet-2203/network_cicd_lab
+cd ansible/
+source ansible_env_prod
+ansible-playbook -i hosts_prod playbooks/site.yaml
+ansible-playbook -i hosts_prod playbooks/testing-playbook.yml
 
 echo "Setup Part 2 Complete.  "
 echo "  To start the lab run this command."
