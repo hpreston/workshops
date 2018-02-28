@@ -312,6 +312,9 @@ snmp-server community SecureWrite RW
 ################################################################################
 # Exercise 14: Update Ansible Configuration
 ################################################################################
+# Exit from the production switch
+exit
+
 # Open Global Variable File for Ansible
 open ansible/group_vars/all.yaml
 
@@ -355,6 +358,9 @@ snmp-server community NewSecureWrite RW
 ################################################################################
 # Lab Cleanup
 ################################################################################
+# Exit from the production switch
+exit
+
 cd ~/code/ciscolive_workshops/devnet-2203/
 ./cicd_lab_cleanup1.sh
 

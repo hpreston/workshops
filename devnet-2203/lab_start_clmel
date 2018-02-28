@@ -1,0 +1,67 @@
+#! /bin/bash
+
+echo "This script will setup the workstation to run DevNet Workshop: "
+echo "    DEVNET-2203 "
+echo " "
+echo " This script installs pre-reqs and prepares the environment "
+echo " "
+
+echo "Beginning Setup"
+echo "Step 1: Installing Pre-Reqs"
+echo "  - Python"
+cd ~/code/ciscolive_workshops/devnet-2203
+pwd
+virtualenv venv --python=python2.7
+source venv/bin/activate
+pip install -r requirements.txt
+
+echo "  - Telnet"
+brew install telnet
+
+# echo "  - SSH Pass"
+# brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
+
+echo "Step 3: Verify DevBox Accessible"
+ping -c 4 10.10.20.20
+if [ $? -ne 0 ]
+then
+    echo "DevBox Unavailable."
+    echo "Please ensure active and then click anykey to continue"
+    read CONFIRM
+    echo "Testing Connectivity to DevBox."
+    ping -c 4 10.10.20.20
+    if [ $? -ne 0 ]
+    then
+      echo "DevBox Unavailable. Killing VPN connection and stopping setup."
+      OCPID=$(cat openconnect_pid.txt)
+      kill ${OCPID}
+    fi
+fi
+
+echo "Step 6: Clone Down Lab Repo from Gogs "
+cd ~/code/ciscolive_workshops/devnet-2203/
+git clone http://netdevopsuser@10.10.20.20/gogs/netdevopsuser/network_cicd_lab
+cd ~/code/ciscolive_workshops/devnet-2203/network_cicd_lab
+git config user.name "NetDevOps User"
+git config user.email "netdevopsuser@netdevops.local"
+
+
+
+# Setup Steps
+echo "Final Step: Open up lab resources"
+open ~/code/ciscolive_workshops/devnet-2203/lab_notes.txt
+
+# cd network_cicd_lab
+
+# open -a /Applications/Google\ Chrome.app --args --incognito
+open http://10.10.20.20/gogs/netdevopsuser/network_cicd_lab -a /Applications/Google\ Chrome.app --args --incognito
+open http://10.10.20.20 -a /Applications/Google\ Chrome.app --args --incognito
+open http://10.10.20.160:19400/simulations/ -a /Applications/Google\ Chrome.app --args --incognito
+open https://web.ciscospark.com -a /Applications/Google\ Chrome.app --args --incognito
+# open https://cisco.box.com/v/SPT -a /Applications/Google\ Chrome.app --args --incognito
+
+# vagrant up
+
+
+echo "Setup  Complete.  "
+echo " "
