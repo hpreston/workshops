@@ -14,7 +14,7 @@ echo "What is the VPN Password? (Instructor will provide)"
 read VPNPASSWORD
 
 # VPN User Account
-VPNUSER=hapresto
+VPNUSER=hapresto-perm
 
 echo "Setting up for Pod 'rave${DEVNUMBER}'.  Is this correct? y/n"
 read CONFIRM
