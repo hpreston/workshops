@@ -1,0 +1,16 @@
+standard_contracts:
+  - name: icmp
+    contract_tenant: kubesbx{{ podnum }}
+    type: consumer
+  - name: dns
+    contract_tenant: kubesbx{{ podnum }}
+    type: consumer
+  - name: health-check
+    contract_tenant: kubesbx{{ podnum }}
+    type: provider
+  - name: "kubesbx{{ podnum }}-l3out-allow-all"
+    contract_tenant: common
+    type: consumer
+namespace:
+  name: myhero
+  description: Kubernetes Namespace Isolation Policy
