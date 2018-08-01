@@ -22,7 +22,7 @@ metadata:
   annotations:
     opflex.cisco.com/endpoint-group: '{"tenant":"kubesbxXX","app-profile":"myhero","name":"myhero-app"}'
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
