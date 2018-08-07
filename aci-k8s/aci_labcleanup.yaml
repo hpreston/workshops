@@ -1,0 +1,49 @@
+---
+- name: Cleanup ACI Objects from Lab
+  hosts: apic
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Remove Namespace EPG
+      aci_epg:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: False
+        state: absent
+        tenant: kubesbx{{ podnum }}
+        ap: kubernetes
+        epg: "ns-{{ namespace.name }}"
+
+    - name: Remove Deployment Application Profile
+      aci_ap:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: False
+        state: "absent"
+        tenant: "kubesbx{{ podnum }}"
+        ap: "{{ myhero.appprofile.name }}"
+
+    - name: Remove Contracts
+      aci_contract:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: False
+        state: "absent"
+        tenant: "kubesbx{{ podnum }}"
+        contract: "{{ item.contract }}"
+      with_items: "{{ myhero.contracts }}"
+
+    - name: Remove Filters
+      aci_filter:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: False
+        state: "absent"
+        tenant: "kubesbx{{ podnum }}"
+        filter: "{{ item.filter }}"
+      with_items: "{{ myhero.filters }}"
