@@ -1,7 +1,8 @@
 venv/
 *.pyc
-scratch.txt
+scratch*
 mybot.py
 .vagrant
 .virl/
 *.retry
+aci-k8s/host_vars/apic1.yaml
