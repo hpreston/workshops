@@ -1,0 +1,41 @@
+---
+- name: Wait for all devices to be available
+  hosts: all
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - wait_for:
+        port: "{{ ansible_port }}"
+        sleep: 10
+
+- name: Configure IOS XE 1
+  hosts: iosxe1
+  connection: network_cli
+
+  tasks:
+    - name: Enable GigabitEthernet2
+      ios_interface:
+        name: GigabitEthernet2
+        enabled: True
+    - name: Configure GigabitEthernet 2
+      ios_l3_interface:
+        name: GigabitEthernet2
+        ipv4: 172.16.0.1/30
+
+- name: Configure NXOS1
+  hosts: nxos1
+  connection: network_cli
+
+  tasks:
+    - name: Enable Layer 3 Etherent1/1
+      nxos_interface:
+        interface: Ethernet1/1
+        mode: layer3
+        admin_state: up
+    - name: Assign IPv4 on Ethernet1/1
+      nxos_ip_interface:
+        interface: Ethernet1/1
+        version: v4
+        addr: 172.16.0.2
+        mask: 30

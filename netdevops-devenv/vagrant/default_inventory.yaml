@@ -1,0 +1,43 @@
+all:
+  vars:
+    ansible_python_interpreter: /usr/bin/env python
+  children:
+    network:
+      hosts:
+        iosxe1:
+          ansible_host: 127.0.0.1
+          ansible_port: 3122
+          ansible_network_os: ios
+          ansible_user: vagrant
+          ansible_password: vagrant
+          ansible_become: yes
+          ansible_become_method: enable
+          ansible_become_pass: cisco
+          netconf_port: 3123
+          provider:
+            host: 127.0.0.1
+            username: vagrant
+            password: vagrant
+            auth_pass: cisco
+            authorize: yes
+            port: 3122
+            timeout: 20
+
+        nxos1:
+          ansible_host: 127.0.0.1
+          ansible_port: 3222
+          ansible_network_os: nxos
+          ansible_user: vagrant
+          ansible_password: vagrant
+          ansible_become: no
+          ansible_become_method: enable
+          ansible_become_pass: cisco
+          netconf_port: 3223
+          provider:
+            host: 127.0.0.1
+            username: vagrant
+            password: vagrant
+            auth_pass: cisco
+            authorize: yes
+            port: 3222
+            timeout: 20
