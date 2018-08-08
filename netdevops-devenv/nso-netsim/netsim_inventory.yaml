@@ -1,0 +1,209 @@
+iosxe0:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10022
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.0.1 255.255.255.0
+
+iosxe1:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10023
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.1.1 255.255.255.0
+
+iosxe2:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10024
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.2.1 255.255.255.0
+
+iosxe3:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10025
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.3.1 255.255.255.0
+
+iosxe4:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10026
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.4.1 255.255.255.0
+
+iosxe5:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10027
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.5.1 255.255.255.0
+
+iosxe6:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10028
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.6.1 255.255.255.0
+
+iosxe7:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10029
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.7.1 255.255.255.0
+
+iosxe8:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10030
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.8.1 255.255.255.0
+
+iosxe9:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10031
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.9.1 255.255.255.0
+
+iosxe10:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10032
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.10.1 255.255.255.0
+
+iosxe11:
+  device_type: cisco_ios
+  host: 127.0.0.1
+  ssh_port: 10033
+  username: admin
+  password: admin
+  interfaces:
+    - interface: GigabitEthernet1/1
+      ip: 172.16.11.1 255.255.255.0
+
+
+
+# iosxe1:
+#   device_type: cisco_ios
+#   host: 127.0.0.1
+#   ssh_port: 10022
+#   username: admin
+#   password: admin
+#   netconf_port: 12022
+#   interfaces:
+#     - interface: GigabitEthernet1/1
+#       ip: 172.16.1.1 255.255.255.0
+#
+# iosxe2:
+#   device_type: cisco_ios
+#   host: 127.0.0.1
+#   ssh_port: 10024
+#   username: admin
+#   password: admin
+#   netconf_port: 12024
+#   interfaces:
+#     - interface: GigabitEthernet1/1
+#       ip: 172.16.2.1 255.255.255.0
+#
+# iosxe3:
+#   device_type: cisco_ios
+#   host: 127.0.0.1
+#   ssh_port: 10025
+#   username: admin
+#   password: admin
+#   netconf_port: 12025
+#   interfaces:
+#     - interface: GigabitEthernet1/1
+#       ip: 172.16.3.1 255.255.255.0
+#
+# iosxe4:
+#   device_type: cisco_ios
+#   host: 127.0.0.1
+#   ssh_port: 10026
+#   username: admin
+#   password: admin
+#   netconf_port: 12026
+#   interfaces:
+#     - interface: GigabitEthernet1/1
+#       ip: 172.16.4.1 255.255.255.0
+
+# nxos1:
+#   device_type: cisco_nxos
+#   host: 127.0.0.1
+#   ssh_port: 10023
+#   username: admin
+#   password: admin
+#   netconf_port: 12023
+#   interfaces:
+#     - interface: Ethernet1/1
+#       ip: 172.17.1.1/24
+#
+# nxos2:
+#   device_type: cisco_nxos
+#   host: 127.0.0.1
+#   ssh_port: 10027
+#   username: admin
+#   password: admin
+#   netconf_port: 12027
+#   interfaces:
+#     - interface: Ethernet1/1
+#       ip: 172.17.2.1/24
+#
+# nxos3:
+#   device_type: cisco_nxos
+#   host: 127.0.0.1
+#   ssh_port: 10028
+#   username: admin
+#   password: admin
+#   netconf_port: 12028
+#   interfaces:
+#     - interface: Ethernet1/1
+#       ip: 172.17.3.1/24
+#
+# nxos4:
+#   device_type: cisco_nxos
+#   host: 127.0.0.1
+#   ssh_port: 10029
+#   username: admin
+#   password: admin
+#   netconf_port: 12029
+#   interfaces:
+#     - interface: Ethernet1/1
+#       ip: 172.17.4.1/24
