@@ -93,7 +93,7 @@ In the world of application development and micro services Kubernetes is fast be
     time="2018-07-30T19:52:48Z" level=info msg="Connecting to APIC" host=10.10.20.12
     time="2018-07-30T19:52:49Z" level=info msg="Starting APIC full sync"
     time="2018-07-30T19:52:49Z" level=info msg="APIC full sync completed" deletes=0 updates=20
-```
+    ```
 
 1. Back on the APIC...
 1. Navigate to `Virtual Networking > Container Domains > Kubernetes > kubesbxXX` for your Pod.  
@@ -142,7 +142,7 @@ myhero_ernst.yaml  myhero_ui.yaml
     deployment "myhero-app" created
     service "myhero-ui" created
     deployment "myhero-ui" created
-```
+    ```
 
 1. You can use the following commands to monitor the deployment and status.  
     * `kubectl get deployments`
