@@ -347,12 +347,16 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
 
 1. Once the nodes are available, use `virl generate ansible` to create the default inventory file.  *This command can take a long time to complete*
 
-1. Once complete, open the file `default_inventory.yaml`.  See how the file is organized into the "core / dist / access" as expected.  This is driven by an extension included in the VIRL topology file (`topology.virl`).  If you are building topologies to work with Ansible, you can simply include this key to organize into groups.  
+1. Once complete, open the file `default_inventory.yaml`.  See how the file is organized into the "core / dist / access" as expected.  
+
+1. This is driven by an extension included in the VIRL topology file (`topology.virl`).  If you are building topologies to work with Ansible, you can simply include this key to organize into groups.  
 
     ```xml
     <!--- EXAMPLE ---> 
     <entry key="ansible_group" type="String">distribution</entry>
     ```
+    
+1. Open the `topology.virl` file and look at how the simulation is described in the XML doc.  How would you add an additional access switch?  
 
 1. Run the included Ansible playbook, `network_deploy.yaml` against the topology.  
 
@@ -360,8 +364,68 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
     ansible-playbook network_deploy.yaml
     ```
 
-1. 
+    * If the playbook errors, run it again.  You can limit the devices or groups included by adding `-l core` to target just the core group, or `-l core1` to target just a single device.  
+
+1. Once the playbook has completed, let's verify that the network is operating as expected.  Connect to `core1` and check the routing table.  Do you see any OSPF routes?  
+    
+    ```bash
+    virl ssh core1
+    
+    show ip route
+    ```
+
+1. Try to ping from `core1` to a vlan interface on `dist2`. 
+
+    ```bash
+    ping 172.16.102.3
+    ```
+
+1. Disconnect from the switches and `down` the network.  
+
+    ```bash
+    virl down 
+    ```
 
 ## Section Summary and Key Points
+Cisco VIRL and CML provide the NetDevOps developer with an excellent development environment for their work.  These simulations can be robust and align to production topologies where the automation scripts and configuration management workflows will be put to use.  Furthermore, VIRL and CML support including a variety of network and non-network devices in the topologies.  Anything providing a KVM image can be included.  
+
+And with the addition of `virlutils`, the NetDevOps experience is made even better.  
+
+To summarize the advantages of VIRL as the development environment: 
+
+1. Robust support for large topologies mimicing production 
+2. Simulations can include servers and applications in addition to network.  
+3. Full data plane within the simulation to test traffic flows and protocol behavior. 
+4. Off-load simulation to remote server. 
+
+But there are definite caveats to consider as well.  
+
+1. For typical uses, not a fully local dev environment. 
+2. Significant time to instantiate networks. 
+3. Not an insignificant resource requirement for large topologies.  
 
 # Lab Cleanup
+
+1. Make sure all simulations are have been stopped.  
+
+    ```bash
+    # Vagrant 
+    vagrant global-status 
+    vagrant destroy ID
+    
+    # NSO NetSim
+    killall confd 
+    
+    # Virl - from the ciscolive_workshops/netdevops_devenv/virl directory 
+    virl ls --all 
+    virl down 
+    ```
+    
+1. Delete the lab repository.  
+
+    ```bash
+    cd ~
+    rm -Rf ciscolive_workshops/
+    ```
+    
+1. Disconnect from the VPN.  
