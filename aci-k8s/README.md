@@ -250,11 +250,11 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
 1. Now you need to tell the ACI Controller to assign all pods to the EPG that was created.  This is done with `annotations` in Kubernetes.  Annotations are meta-data that Kubernetes itself does NOT use, but can be read by plugins and tools, such as CNI plugins.  
 2. Use the following command **BUT UPDATED THE TENANT NAME** to provide the linkage.  
 
-```bash
-kubectl annotate namespace myhero \
-  opflex.cisco.com/endpoint-group='{"tenant": "kubesbxXX", "app-profile": "kubernetes", "name": "ns-myhero"}' \
-  --overwrite
-```
+    ```bash
+    kubectl annotate namespace myhero \
+      opflex.cisco.com/endpoint-group='{"tenant": "kubesbxXX", "app-profile": "kubernetes", "name": "ns-myhero"}' \
+      --overwrite
+    ```
 
 1. Verify the annotation with `kubectl describe namespace myhero`
 
@@ -402,7 +402,7 @@ kubectl annotate namespace myhero \
     myhero-mosca-793212554-07xg5    1/1       Running   0          15m
     myhero-ui-240751480-67tsb       1/1       Running   0          15m
     myhero-ui-240751480-dz0wc       1/1       Running   0          15m
-```
+    ```
 
 1. Try to ping the IP for the myhero-app pod.  
 
@@ -515,9 +515,9 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
 2. You can explore the application policy via the APIC GUI but the key element is that the `myhero-ui` EPG **cannot** directly communicate with the `myhero-data` EPG.  
 3. Change to the `myhero-deployment-policy` application definition folder.  
 
-```bash
-cd app_definitions/myhero-deployment-policy/
-```
+    ```bash
+    cd app_definitions/myhero-deployment-policy/
+    ```
 
 1. Take a look at the file `myhero_data.template`.  Under the `metadata` for the deployment, you'll see the `annotations` section.  Here is where this deployment will be tied to the desired EPG.  
 
