@@ -1,6 +1,5 @@
-# ACI + Kubernetes Lab Guide 
-
-In this lab you will walk see how the ACI CNI plugin for Kubernetes works and explore deploying applications to Kubernetes and how to view, operate and apply policy within ACI.  
+# ACI + Kubernetes Lab Guide
+In the world of application development and micro services Kubernetes is fast becoming THE standard for an “infrastructure platform”.  Envisioned and kicked off by Google, and embraced by everyone from Amazon, Docker, Microsoft and Cisco, Kubernetes is being adopted by customers large and small. Strangely enough, core Kubernetes completely lacks any embedded network solution, leaving it open to the community and customers to fill, what an opportunity for network engineers and Cisco.  In this workshop, you’ll get hands on with the Cisco ACI Plugin to Kubernetes for integrating the application policy model directly into the applications running within Kubernetes.  You’ll see how the integration is established, dive into deploying applications with Kubernetes and ACI, and the operational visibility and power when these tools are combined.  When the session is over, you’ll be able to continue the exploration on your own leveraging the workshop resources and hosted platform provided by DevNet!
 
 * [Lab Setup](#lab-setup)
 * [ACI and Kubernetes Integration Walkthrough](#aci-and-kubernetes-integration-walkthrough)
@@ -15,24 +14,24 @@ In this lab you will walk see how the ACI CNI plugin for Kubernetes works and ex
 2. Open a terminal window and SSH to the Development Workstation for your Pod.  The IP address, username and password are provided in your pod info.  
 
     ```bash
-    ssh developer@IP-ADDRESS 
+    ssh developer@IP-ADDRESS
     ```
-    
+
 1. Clone the sample lab code down to your workstation.  And change to the lab directory.  
 
     ```bash
-    git clone https://github.com/hpreston/ciscolive_workshops 
+    git clone https://github.com/hpreston/ciscolive_workshops
     cd ciscolive_workshops/aci-k8s
     ```
 
 1. Create a Python virtual environment, activate, and install the requirements.  
 
     ```bash
-    virtualenv venv 
-    source venv/bin/activate 
+    virtualenv venv
+    source venv/bin/activate
     pip install -r requirements.txt
     ```
-    
+
 1. Create a copy of the Ansible host_vars template for the APIC.  
 
     ```bash
@@ -49,20 +48,20 @@ In this lab you will walk see how the ACI CNI plugin for Kubernetes works and ex
 
 3. From a web browser, connect to the APIC Controller at [https://10.10.20.12](https://10.10.20.12).  Use the username and password from your pod info.  
 
-# ACI and Kubernetes Integration Walkthrough 
+# ACI and Kubernetes Integration Walkthrough
 
-1. From the web browser and APIC... 
+1. From the web browser and APIC...
 1. Navigate to `Tenants > kubesbxXX` for your assigned Pod number.
 1. Expand `Application Profiles > kubernetes > EPGs`
 1. You will see three EPGs listed.  
-    * `kube-default` - Where deployed pods without any explicit policy assignment 
-    * `kube-nodes` - Where the main "node-interface" for kubernetes master and nodes connect to fabric 
+    * `kube-default` - Where deployed pods without any explicit policy assignment
+    * `kube-nodes` - Where the main "node-interface" for kubernetes master and nodes connect to fabric
     * `kube-system` - Where Kubernetes management elements are connected (ie kube-dns)
-1. Explore the `Operational` view of each EPG to see what is present so far. 
+1. Explore the `Operational` view of each EPG to see what is present so far.
 2. Expand `Networking > Bridge Domains`.  You'll see two BDs configured.  
     * `kube-node-bd` provides IP space for the Kubernetes master and nodes.  
     * `kube-pod-bd` provides IP space for all running containers.   
-1. From your SSH connection... 
+1. From your SSH connection...
 2. View the running pods from namespace `kube-system`.  
 
     ```bash
@@ -84,7 +83,7 @@ In this lab you will walk see how the ACI CNI plugin for Kubernetes works and ex
     kube-proxy-phfft                                  1/1       Running   0          7d
     kube-scheduler-sbx04kube01.localdomain            1/1       Running   0          7d
     ```
-    
+
     * The pods starting with `aci-containers` control the integration to ACI and provide the local network enforcement on each node.  
     * You'll see `kube-dns-` listed.  This provides internal cluster DNS resolution.  Also seen in the ACI interface.  
 1. Run the command `kubectl -n kube-system logs aci-containers-controller-3029831268-9hhdf` but use the actual pod name for your pod.  This will show you the log messages for the CNI integration.  
@@ -96,7 +95,7 @@ In this lab you will walk see how the ACI CNI plugin for Kubernetes works and ex
     time="2018-07-30T19:52:49Z" level=info msg="APIC full sync completed" deletes=0 updates=20
 ```
 
-1. Back on the APIC... 
+1. Back on the APIC...
 1. Navigate to `Virtual Networking > Container Domains > Kubernetes > kubesbxXX` for your Pod.  
 2. Expand out Nodes and Namespaces.  See how ACI has visibility into Kubernetes.  
 3. Expand `kube-system > Deployments`
@@ -106,11 +105,11 @@ In this lab you will walk see how the ACI CNI plugin for Kubernetes works and ex
 By running the ACI Integration scripts and preparation, the ACI fabric and policy are prepped with the VMM domain, Tenant, APs, EPGs, and BDs, needed for the integration.  It also creates a Kubernetes deployment file that can be applied to the Kubernetes cluster to start the `aci-containers-controller` deployment that will complete the integration.  
 
 
-# No Policy Applications 
+# No Policy Applications
 
 One of the key values of the ACI K8s integration is that applications can be deployed to Kubernetes just like any other environment with no changes needed by the deveoloper.  Let's deploy a basic, no-policy application.  
 
-1. On the development ssh terminal... 
+1. On the development ssh terminal...
 2. Change into the `myhero` `app_definition` directory.  
 
 ```bash
@@ -132,7 +131,7 @@ myhero_ernst.yaml  myhero_ui.yaml
 
     ```bash
     ./myhero_install.sh
-    
+
     Installing the MyHero Sample Application
     service "myhero-data" created
     deployment "myhero-data" created
@@ -146,7 +145,7 @@ myhero_ernst.yaml  myhero_ui.yaml
 ```
 
 1. You can use the following commands to monitor the deployment and status.  
-    * `kubectl get deployments` 
+    * `kubectl get deployments`
     * `kubectl get pods`
     * `kubectl get services`
     * `kubectl describe pod PODID`
@@ -154,21 +153,21 @@ myhero_ernst.yaml  myhero_ui.yaml
 1. With `kubectl get services`, find the `EXTERNAL-IP` address for the `myhero-ui` service.  Open this address in another tab in your browser.  
 1. The external-ip is available via the loadbalancing and NAT features of the ACI fabric.  
 1. On the ACI GUI, navigate to `Tenants > common > Networking > External Routed Networks > sbx_shared_L3Out > Networks`.  
-2. You'll see entries for `kubesbxXX_svc_default_myhero-app` and `kubesbxXX_svc_default_myhero-ui` 
+2. You'll see entries for `kubesbxXX_svc_default_myhero-app` and `kubesbxXX_svc_default_myhero-ui`
 3. If you click on the UI entry and look under "Subnets" in the policy, you'll find the `EXTERNAL-IP` listed.  
-4. The load-balancing is auto created by the CNI plugin.  Other policy elements to view are: 
+4. The load-balancing is auto created by the CNI plugin.  Other policy elements to view are:
     * `Tenants > common > Policies > L4-L7 Policy Based Redirect`
-    * `Tenants > common > Services > L4-L7` 
+    * `Tenants > common > Services > L4-L7`
         * `Service Graph Templates`
         * `Devices`
         * `Devices Selection Policies`
-        * `Deployed Graph Instances` 
-1. Navigate to `Tenants > kubesbxXX > Application Profiles > kubernetes > Application EPGs > kube-default` and look at the Operational tab.  You'll see entries for each pod running including which node, IP, encap, etc. 
+        * `Deployed Graph Instances`
+1. Navigate to `Tenants > kubesbxXX > Application Profiles > kubernetes > Application EPGs > kube-default` and look at the Operational tab.  You'll see entries for each pod running including which node, IP, encap, etc.
 1. Now uninstall the application so we can apply some policy.  From the ssh terminal.
 
     ```bash
     ./myhero_uninstall.sh
-    
+
     Uninstalling the MyHero Demo Application
     service "myhero-ui" deleted
     service "myhero-app" deleted
@@ -182,16 +181,16 @@ myhero_ernst.yaml  myhero_ui.yaml
     ```
 
 1. Let's check the logs on the `aci-controller` again to see that it has been keeping ACI in sync with Kubernetes changes.
-    
+
     ```bash
     # first to get the pod name
     kubectl -n kube-system get pods | grep aci-containers-controller
-    
+
     aci-containers-controller-3029831268-9hhdf        1/1       Running   0          7d
-    
-    # Now use that name to retrieve the logs 
+
+    # Now use that name to retrieve the logs
     kubectl -n kube-system logs aci-containers-controller-3029831268-9hhdf
-    ``` 
+    ```
 
 ## Section Summary and Key Points
 
@@ -217,34 +216,34 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
 
     ```bash
     ansible-playbook aci_namespace_setup.yaml
-    
+
     PLAY [Setup Management EPG for Sandbox] ****************************************
-    
+
     TASK [Create Namespace EPG] ****************************************************
     changed: [apic1]
-    
+
     TASK [Add Kubernetes VMM Domain to EPG] ****************************************
     changed: [apic1]
-    
+
     TASK [Add Standard Contracts] **************************************************
     changed: [apic1] => (item={u'type': u'consumer', u'name': u'icmp'})
     changed: [apic1] => (item={u'type': u'consumer', u'name': u'dns'})
     changed: [apic1] => (item={u'type': u'provider', u'name': u'health-check'})
     changed: [apic1] => (item={u'type': u'consumer', u'name': u'kubesbx04-l3out-allow-all'})
-    
+
     PLAY RECAP *********************************************************************
     apic1                      : ok=3    changed=3    unreachable=0    failed=0
     ```
 
 1. Check the APIC GUI, you should now have a new EPG `ns-myhero` under the `kubernetes` Application Profile.  
     * It is assigned the VMM domain for your Kubernetes setup
-    * It has the standard contracts needed for K8s functionality 
+    * It has the standard contracts needed for K8s functionality
 
-1. Now create the Kubernetes Namespace for `myhero` 
+1. Now create the Kubernetes Namespace for `myhero`
 
     ```bash
     kubectl create namespace myhero
-    
+
     kubectl get namespaces
     ```
 
@@ -265,9 +264,9 @@ kubectl annotate namespace myhero \
     Labels:		<none>
     Annotations:	opflex.cisco.com/endpoint-group={"tenant": "kubesbx04", "app-profile": "kubernetes", "name": "ns-myhero"}
     Status:		Active
-    
+
     No resource quota.
-    
+
     No resource limits.
     ```
 
@@ -293,18 +292,18 @@ kubectl annotate namespace myhero \
     deployment "myhero-app" created
     service "myhero-ui" created
     deployment "myhero-ui" created
-    ``` 
+    ```
 1. Verify that the application is in the correct namespace with these commands.  
 
     ```bash
-    # first check `default` namespace 
-    kubectl get pods 
-    
+    # first check `default` namespace
+    kubectl get pods
+
     No resources found.
-    
-    # now check the myhero namespace 
-    kubectl -n myhero get pods 
-    
+
+    # now check the myhero namespace
+    kubectl -n myhero get pods
+
     NAME                            READY     STATUS    RESTARTS   AGE
     myhero-app-1608251026-crd3j     1/1       Running   0          1m
     myhero-app-1608251026-sw3zw     1/1       Running   0          1m
@@ -325,7 +324,7 @@ kubectl annotate namespace myhero \
 1. In the APIC GUI, verify that the Pods show up in the Operational view for the `ns-myhero` EPG.  
 
 1. Now let's verify that the segmentation is working as expected by trying to access one of the MyHero services from the "default" namespace.  
-1. Open a second terminal window, and ssh into the Developer Workstation again (you'll want 2 terminals active). 
+1. Open a second terminal window, and ssh into the Developer Workstation again (you'll want 2 terminals active).
 2. On the new terminal, run this command to start and connect to a running container in the default namespace. *It may take a minute to launch*
 
     ```bash
@@ -339,12 +338,12 @@ kubectl annotate namespace myhero \
     ```bash
     [root@devbox coding]#
     ```
-    
+
 1. In the first terminal window, run this command to verify the new pod and location.  
 
     ```bash
     kubectl get pods
-    
+
     NAME      READY     STATUS    RESTARTS   AGE
     devbox    1/1       Running   0          1m
     ```
@@ -363,7 +362,7 @@ kubectl annotate namespace myhero \
     myhero-ui-240751480-67tsb       1/1       Running   0          9m        10.204.0.168   sbx04kube02.localdomain
     myhero-ui-240751480-dz0wc       1/1       Running   0          9m        10.204.1.39    sbx04kube03.localdomain
     ```
-    
+
 1. On the second terminal with the running container, try to ping the IP of the `myhero-app` pod.  
 
     ```bash
@@ -468,7 +467,7 @@ kubectl annotate namespace myhero \
 
 In this section we saw how we can use the ACI CNI plugin to provide network segmentation at the namespace level.  By having all running containers part of a single EPG in ACI, you have the full power of policy and operational visibility of ACI for all your micro-service applications.  
 
-# Deployment Level Segmentation Applications 
+# Deployment Level Segmentation Applications
 
 Namespace level segmentation is great, but many enterprises are looking for tighter security and segmentation.  What if the frontend web service for an application becomes compromised, controlling access to critical backend services like data can prevent a breach from spreading.  
 
@@ -486,32 +485,32 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
 
     ```bash
     ansible-playbook aci_myhero_app_setup.yaml
-    
+
     # OUTPUT EDITED FOR GUIDE
     PLAY [Setup Management EPG for Sandbox] ****************************************
-    
+
     TASK [Create Filters] **********************************************************
-    
+
     TASK [Create Filter Entries] ***************************************************
-    
+
     TASK [Create Contracts] ********************************************************
-    
+
     TASK [Create Contract Subjects] ************************************************
-    
+
     TASK [Create Contract Subject Filters] *****************************************
-    
+
     TASK [Create Application Profile] **********************************************
-    
+
     TASK [Create EPGs] *************************************************************
-    
+
     TASK [Bind Kubernetes Domain to EPG] *******************************************
-    
+
     TASK [Setup Contracts on EPGs] *************************************************
-    
+
     PLAY RECAP *********************************************************************
     apic1                      : ok=9    changed=4    unreachable=0    failed=0
     ```
-    
+
 1. On the APIC GUI, you'll find a new Application Profile called `myhero` with EPGs for each of the application services.  
 2. You can explore the application policy via the APIC GUI but the key element is that the `myhero-ui` EPG **cannot** directly communicate with the `myhero-data` EPG.  
 3. Change to the `myhero-deployment-policy` application definition folder.  
@@ -537,9 +536,9 @@ cd app_definitions/myhero-deployment-policy/
 1. Before the application definitions can be applied, the templates need to be updated for the correct tenant/pod number.  The install script will ask for your Pod Number, provide the 2 digit pod number when prompted.  
 
     ```bash
-    # Example 
+    # Example
     ./myhero_install.sh
-    
+
     What is your Pod Number?
     04
     Pod Num: 04
@@ -555,7 +554,7 @@ cd app_definitions/myhero-deployment-policy/
     deployment "myhero-ui" created
     ```
 
-1. Verify that the application is running and find the `EXTERNAL-IP` for the `myhero-ui`. 
+1. Verify that the application is running and find the `EXTERNAL-IP` for the `myhero-ui`.
     * `kubectl -n myhero get deployments`
     * `kubectl -n myhero get pods`
     * `kubectl -n myhero get services`
@@ -569,7 +568,7 @@ cd app_definitions/myhero-deployment-policy/
       --image=hpreston/devbox \
       --restart=Never --rm -- /bin/bash
     ```
-    
+
 1. It will initially be placed in the `ns-myhero` EPG that is linked to the namespace.  Use this command in the first terminal window to re-assign it to the `myhero-ui` EPG.  **YOU MUST CHANGE THE TENANT TO MATCH YOUR POD**
 
     ```bash
@@ -582,8 +581,8 @@ cd app_definitions/myhero-deployment-policy/
 1. On the first terminal, find the IP addresses for the running pods.  
 
     ```bash
-    kubectl -n myhero get pods -o wide 
-    
+    kubectl -n myhero get pods -o wide
+
     NAME                            READY     STATUS    RESTARTS   AGE       IP             NODE
     devbox                          1/1       Running   0          2m        10.204.1.45    sbx04kube03.localdomain
     myhero-app-1608251026-gq22b     1/1       Running   0          11m       10.204.1.44    sbx04kube03.localdomain
@@ -616,7 +615,7 @@ cd app_definitions/myhero-deployment-policy/
     ```
 
 1. `myhero-ui` **SHOULD NOT** be able to communicate with `myhero-data`.  Let's verify it.  From the interactive pod, run this command to make an API call.  *Update the IP to match your IP*
-    
+
     ```bash
     [root@devbox coding]# curl -H "key: SecureData" 10.204.1.42:5000/options
     ^C
@@ -666,7 +665,7 @@ cd app_definitions/myhero-deployment-policy/
 
     ```bash
     ./myhero_uninstall.sh
-    
+
     Uninstalling the MyHero Demo Application
     service "myhero-ui" deleted
     service "myhero-app" deleted
@@ -683,7 +682,7 @@ cd app_definitions/myhero-deployment-policy/
 
 In this section we saw how we can use the ACI CNI plugin for Kubernetes to provide deployment level segmentation and security to applications.  
 
-# Lab Cleanup 
+# Lab Cleanup
 
 Follow these steps to reset the lab to start over.  
 
@@ -691,21 +690,21 @@ Follow these steps to reset the lab to start over.
 
     ```bash
     ansible-playbook aci_labcleanup.yaml
-    
+
     PLAY [Cleanup ACI Objects from Lab] ********************************************
-    
+
     TASK [Remove Namespace EPG] ****************************************************
-    
+
     TASK [Remove Deployment Application Profile] ***********************************
-    
+
     TASK [Remove Contracts] ********************************************************
-    
+
     TASK [Remove Filters] **********************************************************
-    
+
     PLAY RECAP *********************************************************************
     ```
 
-1. Delete the `myhero` namespace from Kubernetes. 
+1. Delete the `myhero` namespace from Kubernetes.
 
     ```bash
     kubectl delete namespace myhero
@@ -715,5 +714,6 @@ Follow these steps to reset the lab to start over.
 
     ```bash
     cd ~
-    rm -Rf ciscolive_workshops 
+    rm -Rf ciscolive_workshops
     ```
+1. Disconnect from the Developer Workstation, and end the VPN connection.  
