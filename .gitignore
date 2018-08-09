@@ -6,3 +6,7 @@ mybot.py
 .virl/
 *.retry
 aci-k8s/host_vars/apic1.yaml
+netsim/
+netdevops-devenv/virl/configs/*.xml
+netdevops-devenv/virl/default_inventory.yaml
+netdevops-devenv/virl/topology.virl
