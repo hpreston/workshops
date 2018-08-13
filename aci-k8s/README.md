@@ -8,6 +8,46 @@ In the world of application development and micro services Kubernetes is fast be
 * [Deployment Level Segmentation Applications](#deployment-level-segmentation-application)
 * [Lab Cleanup](#lab-cleanup)
 
+# Lab Preparation
+Before beginning this lab, the Kubernetes Cluster needs to be installed and integrated with ACI.  This is intended to be done *before* the guided portion of the lab by the instructor.  These steps are for their benefit.  
+
+1. Open a VPN Connection to the pod.  
+2. ssh to the Developer Workstation for the pod.  
+
+    ```bash
+    ssh developer@IP-ADDRESS
+    ```
+
+1. Set 2 local environment variables for this pod using the info.  
+
+    ```bash
+    export POD_NUM=??
+    export POD_PASS=????
+    ```
+
+1. Run this command to download the auto_deploy script
+
+    ```bash
+    curl -o auto_deploy.sh \
+      https://raw.githubusercontent.com/DevNetSandbox/sbx_acik8s/auto_deploy/kube_setup/auto_deploy.sh && \
+      chmod +x auto_deploy.sh && \
+      ./auto_deploy.sh ${POD_NUM} ${POD_PASS}
+    ```
+
+1. Verifications.  
+    * Kubernetes Setup
+    
+        ```bash
+        # Ensure all are "Ready"
+        kubectl get nodes
+        
+        # Make sure all are "Running"
+        kubectl get pods --all-namespaces 
+        ```
+
+    * ACI - Connect to https://10.10.20.12.  Login as Pod user and verify that the nodes show up. 
+    
+
 # Lab Setup
 
 1. Establish VPN connection to your assigned pod.  
@@ -156,7 +196,7 @@ myhero_ernst.yaml  myhero_ui.yaml
 2. You'll see entries for `kubesbxXX_svc_default_myhero-app` and `kubesbxXX_svc_default_myhero-ui`
 3. If you click on the UI entry and look under "Subnets" in the policy, you'll find the `EXTERNAL-IP` listed.  
 4. The load-balancing is auto created by the CNI plugin.  Other policy elements to view are:
-    * `Tenants > common > Policies > L4-L7 Policy Based Redirect`
+    * `Tenants > common > Policies > Protocol > L4-L7 Policy Based Redirect`
     * `Tenants > common > Services > L4-L7`
         * `Service Graph Templates`
         * `Devices`
