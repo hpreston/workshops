@@ -27,7 +27,10 @@ Every network engineer needs a lab environment to explore APIs, test code, and e
     pip install -r requirements.txt
     ```
 
-1.
+## Pre-workshop start steps for timing.  
+
+1. `vagrant up && vagrant suspend`
+1. `virl up --provision && virl generate ansible`
 
 # Vagrant
 Vagrant is an Open Source command line utility designed for software developers to quickly instantiate and test software in consistent development environments.  It controls a variety of "providers" which offer the virtualization technology for hosting the environments.  Common providers are VirtualBox and Docker, though many others are available.  
@@ -52,7 +55,8 @@ Vagrant is an Open Source command line utility designed for software developers 
     vagrant up
     ```
 
-    * ***Note: this will take some time to complete, and will generate an error about timeout connecting to the NX-OS device.  When you see this error, enter `vagrant up` again to complete.***
+    * ***Note: This can take some time to complete, and will generate an error about timeout connecting to the NX-OS device.  When you see this error, enter `vagrant up` again to complete.***
+    * ***Note: The initial `vagrant up` may have already been completed before starting the lab and devices `suspended` to save time.***
 
 1. Open up the `Vagrantfile`.  Answer these questions.  
     * How many network devices will be in this environment?
@@ -255,6 +259,8 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
     virl ls --all
     ```
 
+***NOTE: THESE STEPS WERE COMPLETED TO SAVE TIME.***
+
 1. If any are listed, `down` them with `virl down --sim-name SIMNAME`.  For example:
 
     ```bash
@@ -272,6 +278,8 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
     ```bash
     virl up virlfiles/core-dist-access
     ```
+
+***END NOTE: THESE STEPS WERE COMPLETED TO SAVE TIME.***
 
 1. While the simulation is booting, let's explore what `virlutils` allow the developer to do while interacting with their network.  
 
@@ -346,6 +354,7 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
 1. By now your nodes should be coming up.  Try connecting to them with `virl ssh NODE`.  
 
 1. Once the nodes are available, use `virl generate ansible` to create the default inventory file.  *This command can take a long time to complete*
+    * ***NOTE: This step may have already been completed to save time.  Before running, see if there is a file `default_inventory.yaml` in your directory.***
 
 1. Once complete, open the file `default_inventory.yaml`.  See how the file is organized into the "core / dist / access" as expected.  
 
