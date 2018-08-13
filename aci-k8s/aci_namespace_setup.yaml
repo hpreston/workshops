@@ -1,6 +1,6 @@
 # Create EPG for Sandbox Management
 ---
-- name: Setup Management EPG for Sandbox
+- name: Setup Namespace Segmentation
   hosts: apic
   connection: local
   gather_facts: False
