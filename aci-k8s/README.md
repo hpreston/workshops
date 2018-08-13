@@ -4,7 +4,7 @@ In the world of application development and micro services Kubernetes is fast be
 * [Lab Setup](#lab-setup)
 * [ACI and Kubernetes Integration Walkthrough](#aci-and-kubernetes-integration-walkthrough)
 * [No Policy Applications](#no-policy-application)
-* [Namespace Segmentation Applications](#namespace-segmentation-application)
+* [Namespace Segmentation Applications](#namespace-segmentation-applications)
 * [Deployment Level Segmentation Applications](#deployment-level-segmentation-application)
 * [Lab Cleanup](#lab-cleanup)
 
