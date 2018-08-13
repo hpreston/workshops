@@ -8,7 +8,7 @@ Every network engineer needs a lab environment to explore APIs, test code, and e
 * [Lab Cleanup](#lab-cleanup)
 
 
-# Lab Setup 
+# Lab Setup
 
 1. Establish VPN connection to your assigned pod.  
 
@@ -26,48 +26,48 @@ Every network engineer needs a lab environment to explore APIs, test code, and e
     source venv/bin/activate
     pip install -r requirements.txt
     ```
-    
-1. 
 
-# Vagrant 
+1.
+
+# Vagrant
 Vagrant is an Open Source command line utility designed for software developers to quickly instantiate and test software in consistent development environments.  It controls a variety of "providers" which offer the virtualization technology for hosting the environments.  Common providers are VirtualBox and Docker, though many others are available.  
 
 1. Starting from the `netdevops-devenv` directory.  
 
-1. Change into the `vagrant` directory 
+1. Change into the `vagrant` directory
 
     ```bash
-    cd vagrant 
+    cd vagrant
     ```
 
 1. Explore what Vagrant Boxes are available on the system.  
 
     ```bash
-    vagrant box list 
+    vagrant box list
     ```
 
 1. Start the Vagrant environment.  
 
     ```bash
-    vagrant up 
+    vagrant up
     ```
-    
+
     * ***Note: this will take some time to complete, and will generate an error about timeout connecting to the NX-OS device.  When you see this error, enter `vagrant up` again to complete.***
 
 1. Open up the `Vagrantfile`.  Answer these questions.  
-    * How many network devices will be in this environment? 
+    * How many network devices will be in this environment?
     * What types will they be?  
     * How are they networked together?  
-    * On what port will SSH be running?  NETCONF?  HTTPS? 
+    * On what port will SSH be running?  NETCONF?  HTTPS?
 
 1. Open up **Activity Monitor** and view how much memory is being used by VirtualBox.  
 
 1. SSH to the devices to verify that they are up and working.  
 
     ```bash
-    vagrant ssh iosxe1 
-    
-    vagrant ssh nxos1 
+    vagrant ssh iosxe1
+
+    vagrant ssh nxos1
     ```
 
 1. If `nxos1` doesn't respond, it is likely still booting up.  You can verify and watch by telneting to the console port.  
@@ -79,43 +79,43 @@ Vagrant is an Open Source command line utility designed for software developers 
 1. Run the sample Ansible Playbook to send some configuration to the devices.  
 
     ```bash
-    ansible-playbook net-config1.yaml 
+    ansible-playbook net-config1.yaml
     ```
-    
+
 1. SSH to `iosxe` and verify the configuration was sent.  Try to ping to `nxos1` on GigabitEthernet2.  Did it work?  
 
 1. Destroy the network.  
 
     ```bash
-    vagrant destroy -f 
+    vagrant destroy -f
     ```
 
 ## Section Summary and Key Points
 Vagrant is a very useful tool for exploring network device APIs and learning about automation capabilities.  It has many advantages for the developer.  
 
 1. Can run completely locally.  
-2. Is near equivelant to features available on production and physical equipment. 
-3. Easily installed and available to developers. *Though getting access to box images takes a bit more time* 
+2. Is near equivelant to features available on production and physical equipment.
+3. Easily installed and available to developers. *Though getting access to box images takes a bit more time*
 
 However it has some limitations as a practical tool for full scale development environments for NetDevOps.  
 
-1. Significant memory load on development workstation. 
-2. Limited size of network topologies. 
+1. Significant memory load on development workstation.
+2. Limited size of network topologies.
 3. Data plane between network devices can be questionable.  
 
-# Cisco NSO netsim 
+# Cisco NSO netsim
 Cisco NSO, or Network Service Orchestrator, is mostly known as a powerful network configuration management utility used by large enterprises and service providers.  However, with the push towards network automation and NetDevOps, many network engineers are finding its network automation and orchestration features are widely applicable to all networks.  
 
 NSO also includes a capability called **NetSim** that can be used to instantiate large networks of many devices, of any type supported by NSO quickly.  These simulations provide management plane access only, and can be used to test network automation that leverage NSO or not.  
 
 1. Starting from the `netdevops-devenv` directory.  
 
-1. Change into the `nso-netsim` directory. 
+1. Change into the `nso-netsim` directory.
 
     ```bash
     cd nso-netsim
     ```
-    
+
 1. Explore what device packages (NEDs) are available on the system.  Each listed package is an available device to be simulated.  The installed list is a small subset of what is supported by NSO.  
 
     ```bash
@@ -125,32 +125,32 @@ NSO also includes a capability called **NetSim** that can be used to instantiate
 1. Create a netsim simulation with 1 IOS device, and 1 NX-OS device.  
 
     ```bash
-    ncs-netsim create-device cisco-ios iosxe1 
-    ncs-netsim add-device cisco-nx nxos1 
+    ncs-netsim create-device cisco-ios iosxe1
+    ncs-netsim add-device cisco-nx nxos1
     ```
-    
+
 1. You will now have a `netsim` directory that contains all the details about your simulated network.  Take a look at the contents.  Each device will have a folder, and in the folder are specifics about each device.  
 
     ```bash
     ls -l netsim/
-    
+
     total 8
     -rw-r--r--  1 hapresto  staff  979 Aug  8 10:35 README.netsim
     drwxr-xr-x  3 hapresto  staff   96 Aug  8 10:35 iosxe1
     drwxr-xr-x  3 hapresto  staff   96 Aug  8 10:35 nxos1
-    ``` 
+    ```
 
 1. Start the simulation.  This should take just a few seconds to complete.  
 
     ```bash
     ncs-netsim start
-    
-    # output 
+
+    # output
     DEVICE iosxe1 OK STARTED
     DEVICE nxos1 OK STARTED
     ```
 
-1. Connect to `iosxe1` with SSH.  The command is `ncs-netsim cli-c devname` 
+1. Connect to `iosxe1` with SSH.  The command is `ncs-netsim cli-c devname`
 
     ```bash
     ncs-netsim cli-c iosxe1
@@ -165,20 +165,20 @@ NSO also includes a capability called **NetSim** that can be used to instantiate
 1. Exit from iosxe1 and connect to nxos1.  Look at the configuration there.  
     * NetSim will start the devices with a basic configuration.  There are ways to stage initial configurations with NetSim, but that is beyond the scope of this lab.  
 
-1. Open up **Activity Monitor** and view how much memory is being used by `confd` (Each `confd` process represents a simulated device). 
+1. Open up **Activity Monitor** and view how much memory is being used by `confd` (Each `confd` process represents a simulated device).
 
 1. Since netsim uses so little memory for each device, let's start a bigger network.  First stop the current simulation and delete.
 
     ```bash
-    ncs-netsim stop 
+    ncs-netsim stop
     rm -Rf netsim/
     ```
-    
+
 1. Create a new simulation network with 12 IOS devices.  Then start it.  
 
     ```bash
     ncs-netsim create-network cisco-ios 12 iosxe
-    ncs-netsim start 
+    ncs-netsim start
     ```
 
 1. Check the memory usage now.  
@@ -227,11 +227,11 @@ NSO also includes a capability called **NetSim** that can be used to instantiate
 ## Section Summary and Key Points
 NSO NetSim is a great tool for NetDevOps engineers who are serious about their development environment.  It's ability to quickly and efficiently generate large "networks" of a variety of devices that can be used to test out automation scripts and tools is excellent.  And though not shown here, NSO also is an excellent network configuration management tool that can help enterprises accelerate their journey towards Network as Code.  
 
-To summarize it's advantages as a dev environment: 
+To summarize it's advantages as a dev environment:
 
 1. Can run completely local
-2. Relatively small impact on host resources 
-3. Able to generate large numbers of simulated devices quickly 
+2. Relatively small impact on host resources
+3. Able to generate large numbers of simulated devices quickly
 
 But there are some elements to keep in mind as well.  
 
@@ -255,14 +255,14 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
     virl ls --all
     ```
 
-1. If any are listed, `down` them with `virl down --sim-name SIMNAME`.  For example: 
+1. If any are listed, `down` them with `virl down --sim-name SIMNAME`.  For example:
 
     ```bash
     virl down --sim-name sbx_nxos_default_h3SOrk
     ```
-    
+
 1. `virlutils` offers the ability to start a simulation from a GitHub repo, and the organization https://github.com/virlfiles provides a number of example simulations.  Let's see what is availble.  
-    
+
     ```bash
     virl search
     ```
@@ -272,32 +272,32 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
     ```bash
     virl up virlfiles/core-dist-access
     ```
-    
+
 1. While the simulation is booting, let's explore what `virlutils` allow the developer to do while interacting with their network.  
 
 1. Start by checking the status of the nodes.  
 
     ```bash
-    virl nodes 
+    virl nodes
     ```
 
-1. Let's monitor the boot status of `dist1`.  
+1. Let's monitor the boot status of a device.  Pick one that shows `ACTIVE` for the state.  For example `dist1`.  
 
     ```bash
     virl console dist1
-    ``` 
+    ```
 
-1. You should see it booting up... let's not interfere with it.  Go ahead and disconnect with `^]` to get the telnet prompt, and then type "quit". 
+1. You should see it booting up... let's not interfere with it.  Go ahead and disconnect with `^]` to get the telnet prompt, and then type "quit".
 
 1. Use `virl --help` to see the variety of commands that are available.  
 
     ```bash
     virl --help
     Usage: virl [OPTIONS] COMMAND [ARGS]...
-    
+
     Options:
       --help  Show this message and exit.
-    
+
     Commands:
       console   console for node
       down      stop a virl simulation
@@ -320,25 +320,25 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
       version   version information
       viz       opens live visualization for the sim
     ```
-    
+
 1. There is also a `--help` for each command for more details.  
 
     ```bash
     virl generate --help
-    
+
     Usage: virl generate [OPTIONS] COMMAND [ARGS]...
-    
+
       generate inv file for various tools
-    
+
     Options:
       --help  Show this message and exit.
-    
+
     Commands:
       ansible  generate ansible inventory
       nso      generate nso inventory
       pyats    Generates a pyats testbed config for an...
     ```
-    
+
     * How handy... `virlutils` can generate an Ansible inventory file for us.  We'll use that in a moment.  
 
 1. You can also quickly launch the web interface for VIRL with `virl uwm`.  
@@ -352,10 +352,10 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
 1. This is driven by an extension included in the VIRL topology file (`topology.virl`).  If you are building topologies to work with Ansible, you can simply include this key to organize into groups.  
 
     ```xml
-    <!--- EXAMPLE ---> 
+    <!--- EXAMPLE --->
     <entry key="ansible_group" type="String">distribution</entry>
     ```
-    
+
 1. Open the `topology.virl` file and look at how the simulation is described in the XML doc.  How would you add an additional access switch?  
 
 1. Run the included Ansible playbook, `network_deploy.yaml` against the topology.  
@@ -367,14 +367,14 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
     * If the playbook errors, run it again.  You can limit the devices or groups included by adding `-l core` to target just the core group, or `-l core1` to target just a single device.  
 
 1. Once the playbook has completed, let's verify that the network is operating as expected.  Connect to `core1` and check the routing table.  Do you see any OSPF routes?  
-    
+
     ```bash
     virl ssh core1
-    
+
     show ip route
     ```
 
-1. Try to ping from `core1` to a vlan interface on `dist2`. 
+1. Try to ping from `core1` to a vlan interface on `dist2`.
 
     ```bash
     ping 172.16.102.3
@@ -383,7 +383,7 @@ Cisco VIRL and CML are platforms for designing and working with large and comple
 1. Disconnect from the switches and `down` the network.  
 
     ```bash
-    virl down 
+    virl down
     ```
 
 ## Section Summary and Key Points
@@ -391,17 +391,17 @@ Cisco VIRL and CML provide the NetDevOps developer with an excellent development
 
 And with the addition of `virlutils`, the NetDevOps experience is made even better.  
 
-To summarize the advantages of VIRL as the development environment: 
+To summarize the advantages of VIRL as the development environment:
 
-1. Robust support for large topologies mimicing production 
+1. Robust support for large topologies mimicing production
 2. Simulations can include servers and applications in addition to network.  
-3. Full data plane within the simulation to test traffic flows and protocol behavior. 
-4. Off-load simulation to remote server. 
+3. Full data plane within the simulation to test traffic flows and protocol behavior.
+4. Off-load simulation to remote server.
 
 But there are definite caveats to consider as well.  
 
-1. For typical uses, not a fully local dev environment. 
-2. Significant time to instantiate networks. 
+1. For typical uses, not a fully local dev environment.
+2. Significant time to instantiate networks.
 3. Not an insignificant resource requirement for large topologies.  
 
 # Lab Cleanup
@@ -409,23 +409,23 @@ But there are definite caveats to consider as well.
 1. Make sure all simulations are have been stopped.  
 
     ```bash
-    # Vagrant 
-    vagrant global-status 
+    # Vagrant
+    vagrant global-status
     vagrant destroy ID
-    
+
     # NSO NetSim
-    killall confd 
-    
-    # Virl - from the ciscolive_workshops/netdevops_devenv/virl directory 
-    virl ls --all 
-    virl down 
+    killall confd
+
+    # Virl - from the ciscolive_workshops/netdevops_devenv/virl directory
+    virl ls --all
+    virl down
     ```
-    
+
 1. Delete the lab repository.  
 
     ```bash
     cd ~
     rm -Rf ciscolive_workshops/
     ```
-    
+
 1. Disconnect from the VPN.  
