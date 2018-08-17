@@ -27,11 +27,11 @@ Every network engineer needs a lab environment to explore APIs, test code, and e
     pip install -r requirements.txt
     ```
 
-## Pre-workshop start steps for timing.  
+<!--## Pre-workshop start steps for timing.  
 
 1. `vagrant up && vagrant suspend`
 1. `virl up --provision && virl generate ansible`
-
+-->
 # Vagrant
 Vagrant is an Open Source command line utility designed for software developers to quickly instantiate and test software in consistent development environments.  It controls a variety of "providers" which offer the virtualization technology for hosting the environments.  Common providers are VirtualBox and Docker, though many others are available.  
 
@@ -421,26 +421,8 @@ But there are definite caveats to consider as well.
 
 # Lab Cleanup
 
-1. Make sure all simulations are have been stopped.  
+1. Run `./cleanup.sh` to ensure the lab is fully shutdown and cleared.  
 
     ```bash
-    # Vagrant
-    vagrant global-status
-    vagrant destroy ID
-
-    # NSO NetSim
-    killall confd
-
-    # Virl - from the ciscolive_workshops/netdevops_devenv/virl directory
-    virl ls --all
-    virl down
+    ./cleanup.sh 
     ```
-
-1. Delete the lab repository.  
-
-    ```bash
-    cd ~
-    rm -Rf ciscolive_workshops/
-    ```
-
-1. Disconnect from the VPN.  
