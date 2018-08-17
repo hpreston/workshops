@@ -722,6 +722,8 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
 
 In this section we saw how we can use the ACI CNI plugin for Kubernetes to provide deployment level segmentation and security to applications.  
 
+<!-- Use the master cleanup playbook to reset
+
 # Lab Cleanup
 
 Follow these steps to reset the lab to start over.  
@@ -757,3 +759,4 @@ Follow these steps to reset the lab to start over.
     rm -Rf ciscolive_workshops
     ```
 1. Disconnect from the Developer Workstation, and end the VPN connection.  
+-->
