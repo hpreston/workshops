@@ -119,11 +119,17 @@ NSO also includes a capability called **NetSim** that can be used to instantiate
     ```bash
     cd nso-netsim
     ```
+    
+1. "Source" the nsorc file.  
+
+    ```bash
+    source ~/ncs47/ncsrc
+    ``` 
 
 1. Explore what device packages (NEDs) are available on the system.  Each listed package is an available device to be simulated.  The installed list is a small subset of what is supported by NSO.  
 
     ```bash
-    ls -l ~/ncs471/packages/neds/
+    ls -l ~/ncs47/packages/neds/
     ```
 
 1. Create a netsim simulation with 1 IOS device, and 1 NX-OS device.  
