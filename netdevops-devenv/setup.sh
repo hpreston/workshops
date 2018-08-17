@@ -69,12 +69,13 @@ then
   sleep 10
 fi
 echo "Starting VIRL Simulation and generating inventory."
-virl up  virlfiles/core-dist-access --provision && virl generate ansible
+virl up virlfiles/core-dist-access --provision
+virl generate ansible
 echo " "
 virl nodes
 echo " "
 echo "If any nodes show 'UNREACHABLE' please fix them."
-echo "  1) virl console NODE and `boot`"
+echo "  1) virl console NODE and boot"
 echo "  2) virl stop NODE && virl start NODE"
 echo " "
 
