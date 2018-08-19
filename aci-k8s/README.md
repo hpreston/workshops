@@ -252,6 +252,12 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
     aci_myhero_app_setup.yaml  aci_namespace_setup.yaml
     ```
 
+1. Make sure that you have activated the Python venv located at `~/ciscolive_workshops/aci-k8s/venv`
+
+    ```bash
+    source ~/ciscolive_workshops/aci-k8s/venv/bin/activate
+    ```
+
 3. Run the `aci_namespace_setup.yaml` playbook.  
 
     ```bash
