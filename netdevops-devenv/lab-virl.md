@@ -21,6 +21,19 @@ The exercises in this lab assume that you have a VIRL or CML server reachable fr
     pip install virlutils
     ```
 
+1. `virlutils` lets you interact with a VIRL or CML server through the command line. There are several ways to provide the address and credentials to the tool, but a common way is the use of a file `.virlrc` located in the project directory (or user home folder). Take a look at the `.virlrc` file in this project. 
+
+    ```bash
+    cat .virlrc
+    
+    # Output
+    VIRL_HOST=10.10.20.160
+    VIRL_USERNAME=guest
+    VIRL_PASSWORD=guest
+    ```
+    
+1. The settings provided are for the DevNet Sandbox instance of VIRL.  If you are using a different VIRL server, update the details as needed.  
+
 1. First let's see if any simulations are currently running on your server.  
 
     ```bash
@@ -35,7 +48,7 @@ The exercises in this lab assume that you have a VIRL or CML server reachable fr
     virl down --sim-name sbx_nxos_default_h3SOrk
     ```
 
-1. `virlutils` offers the ability to start a simulation from a GitHub repo, and the organization https://github.com/virlfiles provides a number of example simulations.  Let's see what is availble.  
+1. `virlutils` offers the ability to start a simulation from a GitHub repo, and the organization https://github.com/virlfiles provides a number of example simulations.  Let's see what is available.  
 
     ```bash
     virl search
@@ -175,7 +188,7 @@ And with the addition of `virlutils`, the NetDevOps experience is made even bett
 
 To summarize the advantages of VIRL as the development environment:
 
-1. Robust support for large topologies mimicing production
+1. Robust support for large topologies mimicking production
 2. Simulations can include servers and applications in addition to network.  
 3. Full data plane within the simulation to test traffic flows and protocol behavior.
 4. Off-load simulation to remote server.
