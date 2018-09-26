@@ -21,9 +21,5 @@ vagrant destroy -f
 echo " "
 cd ..
 
-echo "Deleting Lab Code"
-cd ..
-rm -Rf workshops
-
 echo "Disconnect from the Pod and VPN."
 # open /Applications/Cisco/Cisco\ AnyConnect\ Secure\ Mobility\ Client.app/
