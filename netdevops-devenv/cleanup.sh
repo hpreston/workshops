@@ -1,25 +1,29 @@
 #! /bin/bash
 
 echo "Clear VIRL Simulation"
-cd ~/ciscolive_workshops/netdevops-devenv/virl
+cd virl
 virl down
 rm -Rf .virl/
 rm default-inventory.yaml
 rm topology.yaml
+cd ..
 
 echo "Clear NSO Lab"
 killall confd
 killall confd
-cd ~/ciscolive_workshops/netdevops-devenv/nso-netsim
+cd nso-netsim
 rm -Rf netsim/
+cd ..
 
 echo "End Vagrant Simulation"
-cd ~/ciscolive_workshops/netdevops-devenv/vagrant
+cd vagrant
 vagrant destroy -f
 echo " "
+cd ..
 
 echo "Deleting Lab Code"
-rm -Rf ~/ciscolive_workshops
+cd ..
+rm -Rf workshops
 
-echo "Disconnect from the VPN."
-open /Applications/Cisco/Cisco\ AnyConnect\ Secure\ Mobility\ Client.app/
+echo "Disconnect from the Pod and VPN."
+# open /Applications/Cisco/Cisco\ AnyConnect\ Secure\ Mobility\ Client.app/
