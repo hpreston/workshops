@@ -4,7 +4,7 @@
   connection: network_cli
 
   tasks:
-    - name: Configure Login Banner
+    - name: Configure MOTD Banner
       ios_banner:
-        banner: login
-        text: This Login Banner is managed by Ansible.
+        banner: motd
+        text: Welcome. This banner is managed by Ansible.
