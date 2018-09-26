@@ -1,0 +1,10 @@
+---
+- name: Deploy Baseline Configuration to Network
+  hosts: all
+  connection: network_cli
+
+  tasks:
+    - name: Configure Login Banner
+      ios_banner:
+        banner: login
+        text: This Login Banner is managed by Ansible.
