@@ -14,5 +14,4 @@
         parents: router ospf 1
         lines:
           network 10.0.0.0 0.0.0.255 area 0
-
-  
+          network 192.168.0.0 0.0.0.255 area 0
