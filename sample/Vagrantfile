@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # Create IOS XE Node
+  config.vm.define "iosxe1" do |node|
+    node.vm.box = "iosxe/16.09.01"
+
+    # nic_type: "virtio" needed for IOS XE 16.7+
+    node.vm.network :private_network, virtualbox__intnet: "link1", auto_config: false, nic_type: "virtio"
+    node.vm.network :private_network, virtualbox__intnet: "link2", auto_config: false, nic_type: "virtio"
+
+    # node.vm.provision "ansible" do |ansible|
+    #   ansible.playbook = "ansible/playbooks/ansible_provision.yaml"
+    #   ansible.inventory_path = "./ansible/hosts"
+    # end
+
+    # Staticly set port forwarding to avoid conflict
+    node.vm.network :forwarded_port, guest: 22, host: 3122, id: 'ssh', auto_correct: true
+    node.vm.network :forwarded_port, guest: 443, host: 3125, id: 'restconf-ssl', auto_correct: true
+    node.vm.network :forwarded_port, guest: 830, host: 3123, id: 'netconf', auto_correct: true
+    node.vm.network :forwarded_port, guest: 8443, host: 3126, id: 'iox', auto_correct: true
+  end
+
+end

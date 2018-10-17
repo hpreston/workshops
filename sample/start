@@ -1,0 +1,21 @@
+#! /bin/bash
+
+echo "Preparing the Workstation to Run this lab"
+echo " "
+echo "Note: This command script should be run with 'source start' "
+echo "to prepare the active terminal session. "
+echo " "
+
+echo "Activating Python Virtual Environment"
+source venv/bin/activate
+echo " "
+
+echo "Resuming Vagrant Environment"
+vagrant up
+echo " "
+
+echo "Opening Incognito browser windows for lab"
+killall Google\ Chrome
+open -a /Applications/Google\ Chrome.app --args --incognito https://github.com/hpreston/workshops/blob/master/sample/README.md -a /Applications/Google\ Chrome.app
+open -a /Applications/Google\ Chrome.app --args --incognito https://developer.webex.com
+echo " "
