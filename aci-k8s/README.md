@@ -29,24 +29,24 @@ Before beginning this lab, the Kubernetes Cluster needs to be installed and inte
 
     ```bash
     curl -o auto_deploy.sh \
-      https://raw.githubusercontent.com/DevNetSandbox/sbx_acik8s/auto_deploy/kube_setup/auto_deploy.sh && \
+      https://raw.githubusercontent.com/DevNetSandbox/sbx_acik8s/master/kube_setup/auto_deploy.sh && \
       chmod +x auto_deploy.sh && \
-      ./auto_deploy.sh ${POD_NUM} ${POD_PASS}
+      ./auto_deploy.sh ${POD_NUM} ${POD_PASS} cni -f
     ```
 
 1. Verifications.  
     * Kubernetes Setup
-    
+
         ```bash
         # Ensure all are "Ready"
         kubectl get nodes
-        
+
         # Make sure all are "Running"
-        kubectl get pods --all-namespaces 
+        kubectl get pods --all-namespaces
         ```
 
-    * ACI - Connect to https://10.10.20.12.  Login as Pod user and verify that the nodes show up. 
-    
+    * ACI - Connect to [https://10.10.20.12](https://10.10.20.12).  Login as Pod user and verify that the nodes show up.
+
 
 # Lab Setup
 
@@ -374,15 +374,15 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
 2. On the new terminal, run this command to start and connect to a running container in the default namespace. *It may take a minute to launch*
 
     ```bash
-    kubectl -n default run -i --tty devbox \
-      --image=hpreston/devbox \
-      --restart=Never --rm -- /bin/bash
+    kubectl -n default run -i --tty trojanapp \
+        --image=hpreston/devbox \
+        --restart=Never --rm -- /bin/bash
     ```
 
-1. You should now have a prompt like below.  You are in a running pod called "devbox" in the default namespace.  
+1. You should now have a prompt like below.  You are in a running pod called "trojanapp" in the default namespace.  
 
     ```bash
-    [root@devbox coding]#
+    [root@trojanapp coding]#
     ```
 
 1. In the first terminal window, run this command to verify the new pod and location.  
@@ -391,7 +391,7 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
     kubectl get pods
 
     NAME      READY     STATUS    RESTARTS   AGE
-    devbox    1/1       Running   0          1m
+    trojanapp    1/1       Running   0          1m
     ```
 
 1. In the first terminal window, run this command to get the POD IPs for the MyHero Application.  Make a note of the IP assigned to one of the `myhero-app` pods.  
@@ -419,17 +419,17 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
     6 packets transmitted, 0 received, 100% packet loss, time 5000ms
     ```
 
-1. Try to make an API call to the `myhero-app` service.  ***Replace the IP with the IP for your pod.***  Use `Cntl-C` to cancel when it doesn't work.  
+1. Try to make an API call to the `myhero-app` service.  Use `Cntl-C` to cancel when it doesn't work.  
 
     ```bash
-    curl -H "key: SecureApp" 10.204.1.14:5000/options
+    curl -H "key: SecureApp" myhero-app/options
     ```
 
 1. Type `exit` to end the container in the default namespace.  
 2. Now start a new container, but this time in the `myhero` namespace.  
 
     ```bash
-    kubectl -n myhero run -i --tty devbox \
+    kubectl -n myhero run -i --tty pwndui \
       --image=hpreston/devbox \
       --restart=Never --rm -- /bin/bash
     ```
@@ -439,7 +439,7 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
     ```bash
     kubectl -n myhero get pods
     NAME                            READY     STATUS    RESTARTS   AGE
-    devbox                          1/1       Running   0          24s
+    pwndui                          1/1       Running   0          24s
     myhero-app-1608251026-crd3j     1/1       Running   0          15m
     myhero-app-1608251026-sw3zw     1/1       Running   0          15m
     myhero-app-1608251026-wn8wd     1/1       Running   0          15m
@@ -453,7 +453,7 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
 1. Try to ping the IP for the myhero-app pod.  
 
     ```bash
-    [root@devbox coding]#  ping 10.204.0.167
+    [root@pwndui coding]#  ping 10.204.0.167
     PING 10.204.0.167 (10.204.0.167) 56(84) bytes of data.
     64 bytes from 10.204.0.167: icmp_seq=1 ttl=64 time=3.05 ms
     64 bytes from 10.204.0.167: icmp_seq=1 ttl=64 time=3.51 ms (DUP!)
@@ -472,7 +472,7 @@ In this first type of segmentation, all pods within a **Kubernetes Namespace** e
 1. And try the API call.  
 
     ```bash
-    [root@devbox coding]# curl -H "key: SecureApp" 10.204.0.167:5000/options
+    [root@devbox coding]# curl -H "key: SecureApp" myhero-app/options
     {
         "options": [
             "Captain Cloud",
@@ -610,7 +610,7 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
 2. From the 2nd terminal window to the developer workstation, start an interactive container within the `myhero` namespace.  
 
     ```bash
-    kubectl -n myhero run -i --tty devbox \
+    kubectl -n myhero run -i --tty pwndui \
       --image=hpreston/devbox \
       --restart=Never --rm -- /bin/bash
     ```
@@ -618,7 +618,7 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
 1. It will initially be placed in the `ns-myhero` EPG that is linked to the namespace.  Use this command in the first terminal window to re-assign it to the `myhero-ui` EPG.  **YOU MUST CHANGE THE TENANT TO MATCH YOUR POD**
 
     ```bash
-    kubectl -n myhero annotate pod devbox \
+    kubectl -n myhero annotate pod pwndui \
       opflex.cisco.com/endpoint-group='{"tenant":"kubesbxXX","app-profile":"myhero","name":"myhero-ui"}' \
       --overwrite
     ```
@@ -630,7 +630,7 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
     kubectl -n myhero get pods -o wide
 
     NAME                            READY     STATUS    RESTARTS   AGE       IP             NODE
-    devbox                          1/1       Running   0          2m        10.204.1.45    sbx04kube03.localdomain
+    pwndui                          1/1       Running   0          2m        10.204.1.45    sbx04kube03.localdomain
     myhero-app-1608251026-gq22b     1/1       Running   0          11m       10.204.1.44    sbx04kube03.localdomain
     myhero-data-2347389596-rd49m    1/1       Running   0          11m       10.204.1.42    sbx04kube03.localdomain
     myhero-ernst-3425573530-9svdq   1/1       Running   0          11m       10.204.1.43    sbx04kube03.localdomain
@@ -641,7 +641,7 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
 1. `myhero-ui` **SHOULD** be able to communicate with `myhero-app`.  Let's verify it.  From the interactive pod, run this command to make an API call.  *Update the IP to match your IP*
 
     ```bash
-    [root@devbox coding]# curl -H "key: SecureApp" 10.204.1.44:5000/options
+    [root@pwndui coding]# curl -H "key: SecureApp" myhero-app/options
     {
         "options": [
             "Captain Cloud",
@@ -663,24 +663,24 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
 1. `myhero-ui` **SHOULD NOT** be able to communicate with `myhero-data`.  Let's verify it.  From the interactive pod, run this command to make an API call.  *Update the IP to match your IP*
 
     ```bash
-    [root@devbox coding]# curl -H "key: SecureData" 10.204.1.42:5000/options
+    [root@devbox coding]# curl -H "key: SecureData" myhero-data/options
     ^C
     ```
 
 1. Now let's move the interactive container from `myhero-ui` to `myhero-app`, which should be able to communicate with `myhero-data`.  This is done by updating the annotation on the pod.  Run this command from the first terminal.  **YOU MUST CHANGE THE TENANT TO MATCH YOUR POD**
 
     ```bash
-    kubectl -n myhero annotate pod devbox \
+    kubectl -n myhero annotate pod pwndui \
       opflex.cisco.com/endpoint-group='{"tenant":"kubesbxXX","app-profile":"myhero","name":"myhero-app"}' \
       --overwrite
     ```
 
-1. Verify in the APIC GUI that `devbox` is now in the `myhero-app` EPG.  
+1. Verify in the APIC GUI that `pwndui` is now in the `myhero-app` EPG.  
 
-1. On the interactive devbox pod, re-run the API call for data.  It should now work.  
+1. On the interactive pwndui pod, re-run the API call for data.  It should now work.  
 
     ```bash
-    [root@devbox coding]# curl -H "key: SecureData" 10.204.1.42:5000/options
+    [root@pwndui coding]# curl -H "key: SecureData" myhero-data/options
     {
         "options": [
             "Captain Cloud",
@@ -699,7 +699,7 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
     }
     ```
 
-1. Exit out of the interactive devbox container with `exit`.  
+1. Exit out of the interactive pwndui container with `exit`.  
 
 1. You can see the logs of all the annotation updates by running `kubectl -n kube-system logs aci-containers-controller-3029831268-9hhdf` again.  ***You need the actual name of your pod.  This is available with `kubectl -n kube-system get pods`***
 
