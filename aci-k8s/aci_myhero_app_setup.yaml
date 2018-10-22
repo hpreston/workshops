@@ -95,6 +95,8 @@
         bd: "{{ item.bd }}"
         descr: "{{ item.description }}"
       with_items: "{{ myhero.appprofile.epgs }}"
+      loop_control:
+        pause: 1
 
     - name: Bind Kubernetes Domain to EPG
       aci_epg_to_domain:
