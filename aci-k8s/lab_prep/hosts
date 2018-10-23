@@ -1,0 +1,8 @@
+[all:vars]
+ansible_python_interpreter=/usr/bin/env python
+
+[apic]
+apic1 ansible_host=10.10.20.12
+
+[pods]
+#sbx?? ansible_host=DEV-WK-IP ansible_user=developer ansible_ssh_pass=POD-PASS pod_num=??

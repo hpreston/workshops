@@ -1,0 +1,52 @@
+---
+- name: Reset Lab
+  hosts: pods
+  gather_facts: True
+
+  tasks:
+    - name: Uninstall Applications
+      ignore_errors: True
+      environment:
+        POD_NUM: "{{ pod_num }}"
+        POD_PASS: "{{ ansible_ssh_pass }}"
+      args:
+        executable: /bin/bash
+      shell: |
+        cd ~/ciscolive_workshops/aci-k8s/app_definitions
+        cd myhero
+        ./myhero_uninstall.sh
+        cd ../myhero-namespace-policy
+        ./myhero_uninstall.sh
+        cd ../myhero-deployment-policy
+        ./myhero_uninstall.sh
+
+    - name: Cleanup extra ACI Policies
+      environment:
+        POD_NUM: "{{ pod_num }}"
+        POD_PASS: "{{ ansible_ssh_pass }}"
+      args:
+        executable: /bin/bash
+      shell: |
+        cd ~/ciscolive_workshops/aci-k8s
+        source venv/bin/activate
+        ansible-playbook aci_labcleanup.yaml
+
+    - name: Delete myhero namespace
+      ignore_errors: True
+      environment:
+        POD_NUM: "{{ pod_num }}"
+        POD_PASS: "{{ ansible_ssh_pass }}"
+      args:
+        executable: /bin/bash
+      shell: |
+        kubectl delete namespace myhero
+
+    - name: Delete lab code repository
+      environment:
+        POD_NUM: "{{ pod_num }}"
+        POD_PASS: "{{ ansible_ssh_pass }}"
+      args:
+        executable: /bin/bash
+      shell: |
+        cd ~
+        rm -Rf ciscolive_workshops

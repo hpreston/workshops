@@ -1,0 +1,45 @@
+---
+- name: Install Kubernetes and Prepare Development Workstation
+  hosts: pods
+  gather_facts: True
+
+  tasks:
+    # - name: Install Kubernetes
+    #   environment:
+    #     POD_NUM: "{{ pod_num }}"
+    #     POD_PASS: "{{ ansible_ssh_pass }}"
+    #   args:
+    #     executable: /bin/bash
+    #   shell: |
+    #     curl -o auto_deploy.sh \
+    #       https://raw.githubusercontent.com/DevNetSandbox/sbx_acik8s/auto_deploy/kube_setup/auto_deploy.sh && \
+    #       chmod +x auto_deploy.sh && \
+    #       ./auto_deploy.sh ${POD_NUM} ${POD_PASS}
+
+    - name: Verify Kubernetes Status
+      args:
+        executable: /bin/bash
+      shell: |
+        kubectl get nodes
+        kubectl get pods --all-namespaces
+      register: verify
+
+    - name: Print status
+      debug:
+        msg: "{{ verify }}"
+
+    - name: Clone done lab code and setup Python
+      args:
+        executable: /bin/bash
+      shell: |
+        cd ~/
+        git clone https://github.com/hpreston/ciscolive_workshops
+        cd ciscolive_workshops/aci-k8s
+        virtualenv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Create APIC host_vars file
+      template:
+        src: templates/apic1.j2
+        dest: ~/ciscolive_workshops/aci-k8s/host_vars/apic1.yaml

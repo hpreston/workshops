@@ -1,0 +1,19 @@
+---
+- name: Install Kubernetes and Prepare Development Workstation
+  hosts: pods
+  gather_facts: True
+
+  tasks:
+    - name: Run ACI Playbooks
+      args:
+        executable: /bin/bash
+      shell: |
+        cd ~/ciscolive_workshops/aci-k8s/
+        source venv/bin/activate
+        ansible-playbook aci_namespace_setup.yaml
+        ansible-playbook aci_myhero_app_setup.yaml
+      register: output
+
+    - name: Print status
+      debug:
+        msg: "{{ output }}"
