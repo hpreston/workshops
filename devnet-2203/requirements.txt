@@ -1,4 +1,4 @@
-ansible==2.4.2.0
+ansible==2.4.5.0
 pysnmp==4.4.2
 PyYAML==3.12
 requests==2.18.4
