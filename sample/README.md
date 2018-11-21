@@ -9,10 +9,10 @@ This is a quick template for a hands on workshop.
 * [Lab Cleanup](#lab-cleanup)
 * [Suggested Resources](#suggested-resources)
 
-# Lab Prerequisites 
-To complete the exercises in this lab you will need to be working from a development environment that has the following tools installed and functional. 
+# Lab Prerequisites
+To complete the exercises in this lab you will need to be working from a development environment that has the following tools installed and functional.
 
-*Example List* 
+*Example List*
 
 * [Vagrant](https://vagrantup.com)
 * [VirtualBox](http://virtualbox.org)
@@ -20,8 +20,8 @@ To complete the exercises in this lab you will need to be working from a develop
 * [Python 3.6+](https://python.org)
 * [IOS XE 16.9.1 Vagrant Box](https://github.com/hpreston/vagrant_net_prog/tree/master/box_building#cisco-csr-1000v)
 
-# Lab Environment Setup 
-Complete these steps after installing the prerequisites to setup the environment for this workshop. 
+# Lab Environment Setup
+Complete these steps after installing the prerequisites to setup the environment for this workshop.
 
 > "Setup" is expected to be completed in advance of the actual lab by the instructor to complete time consuming steps.  
 
@@ -32,17 +32,17 @@ Complete these steps after installing the prerequisites to setup the environment
     cd workshops/sample
     ```
 
-1. Run `./setup.sh` to initialize the lab environment.  This will do the following: 
-    * Create Python virtual environment, activate, and install requirements 
-    * Suspend any running VirtualBox VMs 
-    * Start Vagrant Environment 
-    * Suspend Vagrant Environment 
+1. Run `./setup.sh` to initialize the lab environment.  This will do the following:
+    * Create Python virtual environment, activate, and install requirements
+    * Suspend any running VirtualBox VMs
+    * Start Vagrant Environment
+    * Suspend Vagrant Environment
 
     <details>
     <summary>Sample Setup Output</summary>
     <pre>
     Setting up the workstation environment for the lab.
-    
+
     Creating Python 3 Virtual Environment
     Collecting requests==2.19.1 (from -r requirements.txt (line 1))
       Using cached https://files.pythonhosted.org/packages/65/47/7e02164a2a3db50ed6d8a6ab1d6d60b69c4c3fdf57a284257925dfc12bda/requests-2.19.1-py2.py3-none-any.whl
@@ -58,9 +58,9 @@ Complete these steps after installing the prerequisites to setup the environment
     Successfully installed certifi-2018.10.15 chardet-3.0.4 idna-2.7 requests-2.19.1 urllib3-1.23
     You are using pip version 9.0.3, however version 18.1 is available.
     You should consider upgrading via the 'pip install --upgrade pip' command.
-    
+
     Suspending any running VirtualBox VMs
-    
+
     Initializing Vagrant Environment
     Bringing machine 'iosxe1' up with 'virtualbox' provider...
     ==> iosxe1: Importing base box 'iosxe/16.09.01'...
@@ -92,7 +92,7 @@ Complete these steps after installing the prerequisites to setup the environment
         iosxe1:
         iosxe1: This is not an error message; everything may continue to work properly,
         iosxe1: in which case you may ignore this message.
-    
+
     ==> iosxe1: Machine 'iosxe1' has a post `vagrant up` message. This is a message
     ==> iosxe1: from the creator of the Vagrantfile, and not from Vagrant itself:
     ==> iosxe1:
@@ -121,35 +121,35 @@ Complete these steps after installing the prerequisites to setup the environment
     ==> iosxe1:     the Software to you and (a) you may not download, install or use the
     ==> iosxe1:     Software, and (b) you may return the Software as more fully set forth
     ==> iosxe1:     in the Agreement.
-    
+
     Suspending Vagrant Environment
     ==> iosxe1: Saving VM state and suspending execution...
-    
+
     Setup complete.  To begin the lab run:
-    
+
      source start
     </pre>
     </details>
 
-# Lab Start 
+# Lab Start
 When ready to run this lab, follow these steps.  
 
-1. Run `source start` to prepare the workstation.  This will do the following: 
-    * Activate the pre-create virtual environment 
-    * Resume the Vagrant Environment 
-    * Open the Lab Guide in an Incognito Chrome Window 
-    * Open Webex Teams Developer Page in Incognito Chrome Window Make 
+1. Run `source start` to prepare the workstation.  This will do the following:
+    * Activate the pre-create virtual environment
+    * Resume the Vagrant Environment
+    * Open the Lab Guide in an Incognito Chrome Window
+    * Open Webex Teams Developer Page in Incognito Chrome Window Make
 
     <details>
     <summary>Sample Start Output</summary>
     <pre>
     Preparing the Workstation to Run this lab
-    
+
     Note: This command script should be run with 'source start'
     to prepare the active terminal session.
-    
+
     Activating Python Virtual Environment
-    
+
     Resuming Vagrant Environment
     Bringing machine 'iosxe1' up with 'virtualbox' provider...
     ==> iosxe1: Resuming suspended VM...
@@ -161,7 +161,7 @@ When ready to run this lab, follow these steps.
     ==> iosxe1: Machine booted and ready!
     ==> iosxe1: Machine already provisioned. Run `vagrant provision` or use the `--provision`
     ==> iosxe1: flag to force provisioning. Provisioners marked to run always will still run.
-    
+
     ==> iosxe1: Machine 'iosxe1' has a post `vagrant up` message. This is a message
     ==> iosxe1: from the creator of the Vagrantfile, and not from Vagrant itself:
     ==> iosxe1:
@@ -190,18 +190,18 @@ When ready to run this lab, follow these steps.
     ==> iosxe1:     the Software to you and (a) you may not download, install or use the
     ==> iosxe1:     Software, and (b) you may return the Software as more fully set forth
     ==> iosxe1:     in the Agreement.
-    
+
     Opening Incognito browser windows for lab
     No matching processes belonging to you were found
     </pre>
     </details>
-    
-    
-# Lab Cleanup 
+
+
+# Lab Cleanup
 After running the lab, follow these steps to reset the environment to potentially `setup` and `start` again.  
 
-1. Run `./cleanup.sh` to fully reset the environment.  The following will be done: 
-    * Destroy the Vagrant Environment 
+1. Run `./cleanup.sh` to fully reset the environment.  The following will be done:
+    * Destroy the Vagrant Environment
     * Delete the Python 3 Virtual Environment.  
 
     <details>
@@ -210,7 +210,7 @@ After running the lab, follow these steps to reset the environment to potentiall
     Destroying Vagrant Environment
     ==> iosxe1: Forcing shutdown of VM...
     ==> iosxe1: Destroying VM and associated drives...
-    
+
     Deleting Python 3 Virtual Environment
     </pre>
     </details>
