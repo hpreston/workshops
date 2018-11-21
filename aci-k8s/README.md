@@ -623,7 +623,7 @@ In this section we'll see how the ACI CNI plugin provides the ability to segment
       --overwrite
     ```
 
-1. Use the APIC GUI to verify that both the `myhero-ui` and `devbox` pods are showing up in the Operational view of the `myhero-ui` EPG.  
+1. Use the APIC GUI to verify that both the `myhero-ui` and `pwndui` pods are showing up in the Operational view of the `myhero-ui` EPG.  
 1. On the first terminal, find the IP addresses for the running pods.  
 
     ```bash
