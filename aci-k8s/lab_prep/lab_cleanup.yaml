@@ -1,7 +1,7 @@
 ---
 - name: Reset Lab
   hosts: pods
-  gather_facts: True
+  gather_facts: False
 
   tasks:
     - name: Uninstall Applications
