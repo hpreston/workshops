@@ -1,6 +1,19 @@
 # Build a Network Management Chat Bot
 Have you ever found yourself alone in the lab, talking to your router, and wishing it would talk back? In this session, you'll learn how you can make the dream a reality by building a Network Management Chatbot and deploying it to a network device. Through Webex Teams, you'll be able to inquire of your router what its uptime is, which interfaces are up, suggest configuration changes, or even just ask it if it like long walks on the beach. The options are really endless.
 
+## Table of Contents 
+
+* [Lab Preperation](#lab-preparation)
+    * [Connecting to your Pod and Getting the Code](#connecting-to-your-pod-and-getting-the-code)
+    * [Creating a New Bot Account in Webex Teams](#creating-a-new-bot-account-in-webex-teams)
+    * [Completing your env_bot Details](#completing-your-env_bot-details)
+    * [Preparing your Lab Switch](#preparing-your-lab-switch)
+* [Exploring the Initial Chat Bot Code](#exploring-the-initial-chat-bot-code)
+    * [Starting the Sample Bot](#starting-the-sample-bot)
+    * [Sample Bot Code Walkthrough](#sample-bot-code-walkthrough)
+* [Add a New Command!](#add-a-new-command)
+* [Putting Bot in Docker](#putting-bot-in-docker)
+
 # Lab Preparation
 If you haven't been assigned a lab pod by your instructor, or you're running this lab on your own, be sure to go reserve an [Open NX-OS on Nexus 9000 Sandbox](https://devnetsandbox.cisco.com/RM/Diagram/Index/0e22761d-f813-415d-a557-24fa0e17ab50?diagramType=Topology) from DevNet.  
 
