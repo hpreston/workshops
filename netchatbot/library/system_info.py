@@ -1,4 +1,4 @@
-""" Sample functions for gathering basic system info.
+""" Sample functions for gathering basic system info using pyATS.
 
 Copyright (c) 2018 Cisco and/or its affiliates.
 This software is licensed to you under the terms of the Cisco Sample
@@ -19,6 +19,7 @@ from genie.abstract import Lookup
 from genie.libs import ops
 from genie import parsergen
 
+
 def genie_prep(dev):
     """
     Connects and looks up platform parsers for device
@@ -31,6 +32,7 @@ def genie_prep(dev):
     # Load the approprate platform parsers dynamically
     abstract = Lookup.from_device(dev)
     return abstract
+
 
 def get_platform_info(dev):
     """
@@ -46,6 +48,7 @@ def get_platform_info(dev):
     parse.learn()
     return parse
 
+
 def get_interfaces(dev):
     """
     Returns parsed and normalized interface details
@@ -59,6 +62,7 @@ def get_interfaces(dev):
     # Parse required commands, and return structured data
     parse.learn()
     return parse.info
+
 
 def get_routing_info(dev):
     """
@@ -74,6 +78,7 @@ def get_routing_info(dev):
     parse.learn()
     return parse.info
 
+
 def get_ospf_info(dev):
     """
     Returns parsed and normalized OSPF details
@@ -87,6 +92,7 @@ def get_ospf_info(dev):
     # Parse required commands, and return structured data
     parse.learn()
     return parse.info
+
 
 def get_vlans(dev):
     """
@@ -105,12 +111,13 @@ def get_vlans(dev):
     vlans = {}
     for key, value in parse.info["vlans"].items():
         try:
-            if int(key): # indicates a VLAN ID as a key
+            if int(key):  # indicates a VLAN ID as a key
                 vlans[key] = value
-        except ValueError: # This key NOT a vlan info
+        except ValueError:  # This key NOT a vlan info
             pass
 
     return vlans
+
 
 def crc_errors(dev):
     """
@@ -121,14 +128,15 @@ def crc_errors(dev):
 
     error_interfaces = {}
     for interface, details in interfaces.items():
-        counters = details.get('counters')
+        counters = details.get("counters")
         if counters:
-            if 'in_crc_errors' in counters:
-                counters = details['counters']
-                if counters['in_crc_errors'] > 0:
+            if "in_crc_errors" in counters:
+                counters = details["counters"]
+                if counters["in_crc_errors"] > 0:
                     error_interfaces[interface] = counters
 
     return error_interfaces
+
 
 def get_arps(dev):
     """Retrieve the ARP entries from the device.
@@ -152,13 +160,10 @@ def get_arps(dev):
 
     nxos_arp_command = "show ip arp vrf all"
 
-    arps = parsergen.oper_fill_tabular(device=dev,
-                                       show_command=nxos_arp_command,
-                                       header_fields =
-                                    [ "Address",
-                                      "Age",
-                                      "MAC Address",
-                                      "Interface",
-                                      "Flags"])
+    arps = parsergen.oper_fill_tabular(
+        device=dev,
+        show_command=nxos_arp_command,
+        header_fields=["Address", "Age", "MAC Address", "Interface", "Flags"],
+    )
 
     return arps.entries
