@@ -19,7 +19,7 @@ ADD ./requirements.txt /bot
 RUN pip3 install -r requirements.txt
 
 # Add Bot Code Files
-ADD pyats-testbed.yaml /bot
+ADD pyats-testbed*.yaml /bot/
 COPY ./library/*.py /bot/library/
 ADD ./chatbot_example.py /bot
 
