@@ -21,6 +21,7 @@ from webexteamsbot import TeamsBot
 from webexteamsbot.models import Response
 from ats.topology import loader
 from library.system_info import *
+from library.netmiko_commands import *
 
 # Retrieve required details from environment variables
 # Bot Details
@@ -31,11 +32,11 @@ bot_app_name = os.getenv("TEAMS_BOT_APP_NAME")
 testbed_file = os.getenv("TESTBED_FILE")
 device_name = os.getenv("TESTBED_DEVICE")
 
-# # Managed Device Details
-# device_address = os.getenv("DEVICE_ADDRESS")
-# device_netconf_port = os.getenv("DEVICE_NETCONF_PORT")
-# device_username = os.getenv("DEVICE_USERNAME")
-# device_password = os.getenv("DEVICE_PASSWORD")
+# Managed Device Details - Used for netmiko connection
+device_address = os.getenv("DEVICE_ADDRESS")
+device_type = os.getenv("DEVICE_TYPE")
+device_username = os.getenv("DEVICE_USERNAME")
+device_password = os.getenv("DEVICE_PASSWORD")
 
 # Setup pyATS and Genie device
 testbed = testbed_file
@@ -86,12 +87,15 @@ def check_crc_errors(incoming_msg):
     if len(device_crc_errors) > 0:
         response.markdown = "The following interfaces have CRC errors:\n\n"
         for interface, counters in device_crc_errors.items():
-            crc = counters['in_crc_errors']
-            response.markdown += "Interface {} has {} errors.".format(interface, crc)
+            crc = counters["in_crc_errors"]
+            response.markdown += "Interface {} has {} errors.".format(
+                interface, crc
+            )
     else:
         response.markdown = "No CRC Errors found"
 
     return response
+
 
 def vlan_list(incoming_msg):
     """Return the list of VLANs configured on device
@@ -106,6 +110,7 @@ def vlan_list(incoming_msg):
     response.markdown = response.markdown[:-2]
     return response
 
+
 def vlan_interfaces(incoming_msg):
     """Return the interfaces configured for a given vlan.
        Will look for a VLAN id as the FIRST contents following the command in
@@ -113,7 +118,9 @@ def vlan_interfaces(incoming_msg):
     """
     response = Response()
 
-    vlan_to_check = bot.extract_message("/vlan-interfaces", incoming_msg.text).strip()
+    vlan_to_check = bot.extract_message(
+        "/vlan-interfaces", incoming_msg.text
+    ).strip()
     vlan_to_check = vlan_to_check.split()[0]
 
     # Get VLAN details from device
@@ -122,16 +129,20 @@ def vlan_interfaces(incoming_msg):
     # If the vlan provided is configured
     if vlan_to_check in list(vlans.keys()):
         # Reply back with the list of interfaces in a vlan
-        response.markdown = "The following interfaces are configured for VLAN ID {}.\n\n".format(vlan_to_check)
+        response.markdown = "The following interfaces are configured for VLAN ID {}.\n\n".format(
+            vlan_to_check
+        )
         for interface in vlans[vlan_to_check]["interfaces"]:
             response.markdown += "* {}\n".format(interface)
 
     # Next get vlan list, and process for given vlan.
     return response
 
+
 # Create help message for vlan_interfaces command
 vlan_interfaces_help = "See what interfaces are configured for a given vlan. "
 vlan_interfaces_help += "_Example: **/vlan-interfaces 301**_"
+
 
 def arp_list(incoming_msg):
     """Return the arp table from device
@@ -145,19 +156,62 @@ def arp_list(incoming_msg):
         response.markdown = "Here is the ARP information I know. \n\n"
         for arp, details in arps.items():
             response.markdown += "* IP {} and MAC {} are available on interface {}.".format(
-            arp, details["MAC Address"], details["Interface"]
+                arp, details["MAC Address"], details["Interface"]
             )
 
     return response
+
+
+def netmiko_interface_details(incoming_msg):
+    """Retrieve the interface details from the configuration
+       using netmiko example
+    """
+    response = Response()
+
+    # Find the interface to check from the incoming message
+    interface_to_check = bot.extract_message(
+        "/interface-config", incoming_msg.text
+    ).strip()
+    interface_to_check = interface_to_check.split()[0]
+
+    # Use the netmiko function
+    interface = get_interface_details(
+        device_address,
+        device_type,
+        device_username,
+        device_password,
+        interface_to_check,
+    )
+    print(interface)
+
+    # Create and Return the message
+    response.markdown = """
+    {}
+    """.format(
+        interface
+    )
+    return response
+
+
+# Create help message for interface-config command
+interface_config_help = "Retrieve the configuration for an interface. "
+interface_config_help += "_Example: **/interface-config Ethernet1/1**_"
 
 # Set the bot greeting.
 bot.set_greeting(greeting)
 
 # Add new commands to the box.
-bot.add_command("/crc", "See if any interfaces have CRC Errors.", check_crc_errors)
+bot.add_command(
+    "/crc", "See if any interfaces have CRC Errors.", check_crc_errors
+)
 bot.add_command("/vlanlist", "See what VLANs I have configured.", vlan_list)
 bot.add_command("/vlan-interfaces", vlan_interfaces_help, vlan_interfaces)
-bot.add_command("/arplist", "See what ARP entries I have in my table.", arp_list)
+bot.add_command(
+    "/arplist", "See what ARP entries I have in my table.", arp_list
+)
+bot.add_command(
+    "/interface-config", interface_config_help, netmiko_interface_details
+)
 
 # Every bot includes a default "/echo" command.  You can remove it, or any
 # other command with the remove_command(command) method.

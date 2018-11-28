@@ -6,6 +6,7 @@ export TEAMS_BOT_URL=
 export TEAMS_BOT_APP_NAME=
 
 # Managed Device Details
+export DEVICE_TYPE=cisco_nxos
 export DEVICE_ADDRESS=10.10.20.58
 export DEVICE_NETCONF_PORT=830
 export DEVICE_USERNAME=admin
