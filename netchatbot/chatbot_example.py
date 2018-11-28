@@ -155,7 +155,7 @@ def arp_list(incoming_msg):
     else:
         response.markdown = "Here is the ARP information I know. \n\n"
         for arp, details in arps.items():
-            response.markdown += "* IP {} and MAC {} are available on interface {}.".format(
+            response.markdown += "* IP {} and MAC {} are available on interface {}.\n".format(
                 arp, details["MAC Address"], details["Interface"]
             )
 
