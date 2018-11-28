@@ -10,3 +10,4 @@ netsim/
 netdevops-devenv/virl/configs/*.xml
 netdevops-devenv/virl/default_inventory.yaml
 netdevops-devenv/virl/topology.virl
+netchatbot/env_bot

@@ -1,0 +1,16 @@
+# Convenience file to set local environment variables for chat bot
+# Bot Details
+export TEAMS_BOT_EMAIL=
+export TEAMS_BOT_TOKEN=
+export TEAMS_BOT_URL=
+export TEAMS_BOT_APP_NAME=
+
+# Managed Device Details
+export DEVICE_TYPE=cisco_nxos
+export DEVICE_ADDRESS=10.10.20.58
+export DEVICE_NETCONF_PORT=830
+export DEVICE_USERNAME=admin
+export DEVICE_PASSWORD=Cisco123
+
+export TESTBED_FILE="pyats-testbed.yaml"
+export TESTBED_DEVICE=NetChatBot1

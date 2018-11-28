@@ -1,0 +1,26 @@
+testbed:
+
+  name: netchatbot_workshop
+
+
+devices:
+
+  NetChatBot1:
+    alias: NetChatBot1
+    os: nxos
+    type: Nexus9000v
+    tacacs:
+        username: admin
+    passwords:
+        tacacs: Cisco123
+
+    connections:
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 10.10.20.58
+        protocol: ssh
+        port: 22
+    custom:
+      abstraction:
+        order: [os, type]
