@@ -1,7 +1,7 @@
 """Sample code using the functions in the library/system_info folder.
 Meant to be run in "interactive" mode to explore the data models available.
 
-ex: ipython -i pyats_explore.py 
+ex: ipython -i pyats_explore.py
 
 Copyright (c) 2018 Cisco and/or its affiliates.
 This software is licensed to you under the terms of the Cisco Sample
