@@ -2,16 +2,16 @@
 Every network engineer needs a lab environment to explore APIs, test code, and experiment with new ideas and technologies.  The days of dumpster diving, and trolling E-bay for old and outdated hardware are a thing of the past when you open up to the possibilities of NetDevOps Development Environments.  In this hands on workshop you’ll get a chance to explore three options from the Open Source (Vagrant) and Cisco portfolio (VIRL and NSO) that provide robust DevOps style methods for quickly instantiating development networks ranging from one or two devices up through topologies mirroring realistic production networks. And even better, you’ll leave with all the knowledge and resources needed to make these part of your own day to day workflow.
 
 * [Lab Setup and Prerequisites](#lab-setup-and-prerequisites)
-* [Exercise: Vagrant](lab-vagrant.md)
-* [Exercise: Cisco NSO netsim](lab-netsim.md)
-* [Exercise: Cisco VIRL/CML](lab-virl.md)
+* [Exercise: Vagrant](./vagrant)
+* [Exercise: Cisco NSO netsim](./nso-netsim)
+* [Exercise: Cisco VIRL/CML](./virl)
 * [Lab Cleanup](#lab-cleanup)
 * [Suggested Resources](#suggested-resources)
 
 
 # Lab Setup and Prerequisites
-## Prerequisites 
-To complete the exercises in this lab you will need to be working from a development environment that has the following tools installed and functional. 
+## Prerequisites
+To complete the exercises in this lab you will need to be working from a development environment that has the following tools installed and functional.
 
 * [Vagrant](https://vagrantup.com)
 * [VirtualBox](http://virtualbox.org)
@@ -19,13 +19,13 @@ To complete the exercises in this lab you will need to be working from a develop
 * [Cisco VIRL](https://virl.cisco.com)
 * [Python 3.6+](https://python.org)
 
-To make this lab easy to consume, the exercises can be executed leveraging [DevNet Sandboxes](https://developer.cisco.com/sandbox). 
+To make this lab easy to consume, the exercises can be executed leveraging [DevNet Sandboxes](https://developer.cisco.com/sandbox).
 
 * [DevBox Sandbox](http://cs.co/sbx-devbox) - **Exercise: Vagrant**
 * [Multi-IOS Sandbox](http://cs.co/sbx-multi) - **Exercise: Cisco NSO netsim** & **Exercise: VIRL/CML**
 
 ## Guided Lab Setup
-If you are completing this lab as part of a guided lab at an in person or online event you will have been assigned a lab pod.  Along with your instructor, complete these steps to connect to your pod. 
+If you are completing this lab as part of a guided lab at an in person or online event you will have been assigned a lab pod.  Along with your instructor, complete these steps to connect to your pod.
 
 1. Establish VPN connection to your assigned pod.  
 
@@ -56,7 +56,7 @@ If you are completing this lab as part of a guided lab at an in person or online
 1. Run `./cleanup.sh` to ensure the lab is fully shutdown and cleared.  
 
     ```bash
-    ./cleanup.sh 
+    ./cleanup.sh
     ```
 
 # Suggested Resources
