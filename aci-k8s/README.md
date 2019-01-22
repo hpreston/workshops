@@ -1,6 +1,8 @@
 # ACI + Kubernetes Lab Guide
 In the world of application development and micro services Kubernetes is fast becoming THE standard for an “infrastructure platform”.  Envisioned and kicked off by Google, and embraced by everyone from Amazon, Docker, Microsoft and Cisco, Kubernetes is being adopted by customers large and small. Strangely enough, core Kubernetes completely lacks any embedded network solution, leaving it open to the community and customers to fill, what an opportunity for network engineers and Cisco.  In this workshop, you’ll get hands on with the Cisco ACI Plugin to Kubernetes for integrating the application policy model directly into the applications running within Kubernetes.  You’ll see how the integration is established, dive into deploying applications with Kubernetes and ACI, and the operational visibility and power when these tools are combined.  When the session is over, you’ll be able to continue the exploration on your own leveraging the workshop resources and hosted platform provided by DevNet!
 
+> **If you are taking a DevNet Workshop at Cisco Live, DevNet Create, or other event [click here](event-lab-guide.md) for the event lab guide.**  
+
 * [Lab Setup](#lab-setup)
 * [ACI and Kubernetes Integration Walkthrough](#aci-and-kubernetes-integration-walkthrough)
 * [No Policy Applications](#no-policy-application)
