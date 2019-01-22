@@ -1,6 +1,6 @@
 ansible==2.4.5.0
 pysnmp==4.4.2
-PyYAML==3.12
+pyyaml>=4.2b1
 requests>=2.20.0
-urllib3==1.22
+urllib3>=1.23
 virlutils==0.3
