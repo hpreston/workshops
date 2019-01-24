@@ -1,8 +1,8 @@
 # Cisco VIRL or CML
 Cisco VIRL and CML are platforms for designing and working with large and complex network topologies.  VIRL is targeted at "personal use" while CML is designed for enterprise multi-user environments, however both provide similar capabilities and features.  VIRL has been used by network engineers as part of their certification studies, and organizations for testing out configurations for several years, but it also provides a great opportunity for NetDevOps developers looking for a full featured dev environment.  And with the availability of `virlutils`, a Python CLI wrapper for controlling VIRL, this use has become even better.  
 
-## Pre-Lab Setup 
-The exercises in this lab assume that you have a VIRL or CML server reachable from your workstation.  If you need one, you can reserve a [DevNet Multi-IOS Sandbox](http://cs.co/sbx-multi) to work with. 
+## Pre-Lab Setup
+The exercises in this lab assume that you have a VIRL or CML server reachable from your workstation.  If you need one, you can reserve a [DevNet Multi-IOS Sandbox](http://cs.co/sbx-multi) to work with.
 
 > If you are using your own VIRL/CML server, you will need to update the [`.virlrc`](virl/.virlrc) file with the address and credentials. The included file had details for the DevNet Sandbox.
 
@@ -15,23 +15,23 @@ The exercises in this lab assume that you have a VIRL or CML server reachable fr
     cd virl
     ```
 
-1. Install `virlutils` using pip. *This library is included in [`requirements.txt`](requirements.txt) so may already show as installed.* 
+1. Install `virlutils` using pip. *This library is included in [`requirements.txt`](requirements.txt) so may already show as installed.*
 
     ```bash
     pip install virlutils
     ```
 
-1. `virlutils` lets you interact with a VIRL or CML server through the command line. There are several ways to provide the address and credentials to the tool, but a common way is the use of a file `.virlrc` located in the project directory (or user home folder). Take a look at the `.virlrc` file in this project. 
+1. `virlutils` lets you interact with a VIRL or CML server through the command line. There are several ways to provide the address and credentials to the tool, but a common way is the use of a file `.virlrc` located in the project directory (or user home folder). Take a look at the `.virlrc` file in this project.
 
     ```bash
     cat .virlrc
-    
+
     # Output
     VIRL_HOST=10.10.20.160
     VIRL_USERNAME=guest
     VIRL_PASSWORD=guest
     ```
-    
+
 1. The settings provided are for the DevNet Sandbox instance of VIRL.  If you are using a different VIRL server, update the details as needed.  
 
 1. First let's see if any simulations are currently running on your server.  
@@ -160,13 +160,13 @@ The exercises in this lab assume that you have a VIRL or CML server reachable fr
     ```bash
     virl ssh iosv-1
     ```
-    * Did you see the expected banner? 
+    * Did you see the expected banner?
 
-1. Check the OSPF status 
+1. Check the OSPF status
 
     ```
     show ip ospf neighbor
-    show ip route ospf 
+    show ip route ospf
     ```
 
 1. Try to ping from `iosv-1` to a loopback interface on `iosv-2`.

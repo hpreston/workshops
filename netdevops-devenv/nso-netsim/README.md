@@ -3,8 +3,8 @@ Cisco NSO, or Network Service Orchestrator, is mostly known as a powerful networ
 
 NSO also includes a capability called **NetSim** that can be used to instantiate large networks of many devices, of any type supported by NSO quickly.  These simulations provide management plane access only, and can be used to test network automation that leverage NSO or not.  
 
-## Pre-Lab Setup 
-The exercises in this lab assume that Cisco NSO has already been installed on your workstation.  The free, non-production version of NSO that is available on [DevNet](https://developer.cisco.com/docs/nso/#!getting-nso) is sufficient for this lab. 
+## Pre-Lab Setup
+The exercises in this lab assume that Cisco NSO has already been installed on your workstation.  The free, non-production version of NSO that is available on [DevNet](https://developer.cisco.com/docs/nso/#!getting-nso) is sufficient for this lab.
 
 ## Lab Steps
 1. Starting from the `netdevops-devenv` directory.  
@@ -14,21 +14,21 @@ The exercises in this lab assume that Cisco NSO has already been installed on yo
     ```bash
     cd nso-netsim
     ```
-    
+
 1. Verify the NSO application is available.  
-    
+
     ```bash
     which ncs-netsim
-    
-    # Example output 
+
+    # Example output
     ~/ncs47/bin/ncs-netsim
     ```
 
     1. If a message that `no ncs-netsim` was found, `source` the `nsorc` file.  
-    
+
         ```bash
         source ~/ncs47/ncsrc
-        ``` 
+        ```
 
 1. Explore what device packages (NEDs) are available on the system.  Each listed package is an available device to be simulated.  The installed list is a small subset of what is supported by NSO.  
 
@@ -81,9 +81,9 @@ The exercises in this lab assume that Cisco NSO has already been installed on yo
 
 1. View how much memory is being used by `confd` (Each `confd` process represents a simulated device).
     * On Linux systems, you can use the command `top`
-        1. Run the command `top`. 
-        2. Filter for `confd` by pressing `o` to add a filter of `COMMAND=confd`. 
-        3. Press `Shift-e` to change the memory units in the summary view. 
+        1. Run the command `top`.
+        2. Filter for `confd` by pressing `o` to add a filter of `COMMAND=confd`.
+        3. Press `Shift-e` to change the memory units in the summary view.
         4. Press `q ` to quit
 
     ```shell
@@ -93,7 +93,7 @@ The exercises in this lab assume that Cisco NSO has already been installed on yo
     %Cpu(s):  0.3 us,  0.3 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
     MiB Mem : 1838.992 total,  562.965 free,  581.418 used,  694.609 buff/cache
     MiB Swap: 2047.996 total, 2047.996 free,    0.000 used. 1070.184 avail Mem
-    
+
       PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
     12342 develop+  20   0  892668 231320   3180 S  0.0 12.3   0:08.64 confd
     12362 develop+  20   0  699312  45452   3176 S  0.0  2.4   0:02.10 confd
