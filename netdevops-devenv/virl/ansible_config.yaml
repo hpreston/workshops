@@ -2,6 +2,7 @@
 - name: Deploy Baseline Configuration to Network
   hosts: all
   connection: network_cli
+  gather_facts: no
 
   tasks:
     - name: Configure MOTD Banner
