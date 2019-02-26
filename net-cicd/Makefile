@@ -3,7 +3,7 @@ lab: gitlab 3tier deploytest deployprod
 clean: clean3tier cleangitlab
 
 gitlab:
-	cd gitlab && ./setup.sh && cd ..
+	-cd gitlab && ./setup.sh && cd ..
 
 3tier:
 	-cd cicd-3tier && ./setup.sh && cd ..
