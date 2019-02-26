@@ -1,0 +1,46 @@
+- name: Configurations synchronized from NSO to devices
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: NSO sync-to action
+      nso_action:
+        url: "{{ nso.url }}"
+        username: "{{ nso.username }}"
+        password: "{{ nso.password }}"
+        path: /ncs:devices/sync-to
+        input: {}
+
+- name: Push new configurations to NSO
+  hosts: all
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Device configuration
+      nso_config:
+        url: "{{ nso.url }}"
+        username: "{{ nso.username }}"
+        password: "{{ nso.password }}"
+        data:
+          tailf-ncs:devices:
+            device:
+            - name: "{{ nso_device_name }}"
+              tailf-ncs:config:
+                "{{ config }}"
+
+- name: Push new configuration from NSO to Devices
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    - name: NSO sync-to action
+      nso_action:
+        url: "{{ nso.url }}"
+        username: "{{ nso.username }}"
+        password: "{{ nso.password }}"
+        path: /ncs:devices/sync-to
+        input: {}
