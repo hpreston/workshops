@@ -1,4 +1,4 @@
-lab: gitlab 3tier
+lab: gitlab 3tier deploytest deployprod
 
 clean: clean3tier cleangitlab
 

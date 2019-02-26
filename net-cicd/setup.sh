@@ -6,10 +6,11 @@ git clone https://github.com/hpreston/workshops
 cd ~/workshops/net-cicd
 echo ""
 
-# echo "Setting up Python Virtual Environment"
-# python3 -m venv venv
-# source ~/ciscolive_workshops/netdevops-devenv/venv/bin/activate
-# pip install -r requirements.txt
+echo "Setting up Python Virtual Environment"
+cd ~/workshops/net-cicd
+python3.6 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
 
 # echo "Installing NSO 4.7"
