@@ -42,6 +42,14 @@
 	git config --local user.email "developer@devnetsandbox.cisco.com"
 	```
 
+1. 	First setup local python environment 
+
+	```bash
+	python3.6 -m venv venv 
+	source venv/bin/activate 
+	pip install -r requirements.txt 
+	```
+
 1. Use virlutils to connect and see the test and prod networks.  
 
 	```bash
@@ -52,6 +60,8 @@
 	
 	cd ../prod 
 	virl nodes 
+	
+	cd ../..
 	```
 
 	* Use `virl ssh NODE` to connect and checkout the configurations on devices 
@@ -76,15 +86,6 @@
 		```
 		
 1. Let's suppose we made a change to the configuration and wanted to manually update the network.  
-
-	* First setup local python environment 
-
-		```bash
-		cd ~/cicd-3tier
-		python3.6 -m venv venv 
-		source venv/bin/activate 
-		pip install -r requirements.txt 
-		```
 	
 	* Run the Ansible Playbook against the test network. 
 

@@ -25,6 +25,6 @@ pip install -r requirements.txt
 # tar -zxvf /Volumes/HANKLAB/files/nso/4_7/ncs-4.7-cisco-nx-5.5.2.tar.gz
 
 echo "Starting Lab Environment"
-make lab
+make -B lab
 
 echo "Complete!!!"
