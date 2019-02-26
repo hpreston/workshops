@@ -13,3 +13,9 @@ clean3tier:
 
 cleangitlab:
 	-cd gitlab && docker-compose down && cd ..
+
+deploytest:
+	-cd cicd-3tier && ansible-playbook -i inventory/test.yaml site.yaml && cd ..
+
+deployprod:
+	-cd cicd-3tier && ansible-playbook -i inventory/prod.yaml site.yaml && cd ..
