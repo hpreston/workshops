@@ -62,6 +62,8 @@ printf "Configuring external URL for GitLab"
 docker-compose exec gitlab /bin/bash -c "echo external_url \'http://10.10.20.20\' >> /etc/gitlab/gitlab.rb"
 docker-compose exec gitlab gitlab-ctl reconfigure 2>&1 >> gitlab_setup.log
 
+sleep 10
+
 printf "Registering GitLab Runner ... "
 
 docker-compose exec runner1 gitlab-runner register 2>&1 >> gitlab_setup.log
