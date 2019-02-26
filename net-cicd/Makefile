@@ -6,16 +6,10 @@ gitlab:
 	cd gitlab && ./setup.sh && cd ..
 
 3tier:
-	-cd cicd-3tier
-	-./setup.sh
-	-cd ..
+	-cd cicd-3tier && ./setup.sh && cd ..
 
 clean3tier:
-	-cd cicd-3tier
-	-./cleanup.sh
-	-cd ..
+	-cd cicd-3tier && ./cleanup.sh & cd ..
 
 cleangitlab:
-	-cd gitlab
-	-docker-compose down
-	-cd ..
+	-cd gitlab && docker-compose down && cd ..
