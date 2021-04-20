@@ -1,4 +1,4 @@
-ansible==2.4.5.0
+ansible==2.9.20
 pysnmp==4.4.2
 pyyaml>=4.2b1
 requests>=2.20.0
