@@ -78,7 +78,7 @@ six==1.11.0
 textfsm==0.4.1
 traitlets==4.3.2
 unicon==3.4.0
-urllib3==1.24.1
+urllib3==1.26.5
 wcwidth==0.1.7
 webexteamsbot==0.1.2.1
 webexteamssdk==1.0.3
